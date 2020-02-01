@@ -69,11 +69,21 @@ public class MouseSelection : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            dragBoxCollider.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") }, Colliders);
-            foreach (var collider in Colliders)
+            var colliders = new List<Collider2D>();
+            dragBoxCollider.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") }, colliders);
+            if (!Input.GetKey(KeyCode.LeftShift))
+            {
+                foreach (var col in Colliders)
+                {
+                    col.GetComponent<SpriteRenderer>().color = Color.white;
+                }
+                Colliders.Clear();
+            }
+            foreach (var collider in colliders)
             {
                 collider.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.blue;
             }
+            Colliders.AddRange(colliders);
             transform.localScale = originalScale;
 
             sizing = false;
@@ -86,7 +96,7 @@ public class MouseSelection : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             MoveMouseEnd = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (MoveMouseEnd == MoveMouseStart)
+            if (Vector2.Distance(MoveMouseEnd,MoveMouseStart)<.3)
             {
                 if (SelectionNumber >= Colliders.Count) { SelectionNumber = 0; }
                 Colliders[SelectionNumber++].GetComponent<Entity>().TargetPos = MoveMouseStart;
