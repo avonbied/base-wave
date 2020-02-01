@@ -15,7 +15,11 @@ public class MouseSelection : MonoBehaviour
 
     private Vector3 originalScale;
 
-    private List<Collider2D> colliderTest = new List<Collider2D>();
+    private List<Collider2D> Colliders = new List<Collider2D>();
+
+    private Vector2 MoveMouseStart;
+    private Vector2 MoveMouseEnd;
+    private int SelectionNumber = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -65,9 +69,8 @@ public class MouseSelection : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            dragBoxCollider.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") }, colliderTest);
-            Debug.Log(colliderTest.Count);
-            foreach (var collider in colliderTest)
+            dragBoxCollider.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") }, Colliders);
+            foreach (var collider in Colliders)
             {
                 collider.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.blue;
             }
@@ -75,5 +78,28 @@ public class MouseSelection : MonoBehaviour
 
             sizing = false;
         }
+
+        if (Input.GetMouseButtonDown(1))
+            MoveMouseStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            MoveMouseEnd = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (MoveMouseEnd == MoveMouseStart)
+            {
+                if (SelectionNumber >= Colliders.Count) { SelectionNumber = 0; }
+                Colliders[SelectionNumber++].GetComponent<Entity>().TargetPos = MoveMouseStart;
+            }
+            else
+            {
+                var x = 1.0f / Colliders.Count;
+                for (int i = 0; i<Colliders.Count; i++)
+                {
+                    Colliders[i].GetComponent<Entity>().TargetPos = Vector2.Lerp(MoveMouseStart, MoveMouseEnd, x*i);
+                }
+            }
+        }
+
     }
 }
