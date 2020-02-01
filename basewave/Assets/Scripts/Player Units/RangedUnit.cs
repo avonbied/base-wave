@@ -31,7 +31,9 @@ public class RangedUnit : Entity
             {
                 EnemyTarget = null;
                 List<Collider2D> cols = new List<Collider2D>();
-                Debug.Log(RangeCollider.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.NameToLayer("Enemy") }, cols));
+                var x = new ContactFilter2D();
+                x.SetLayerMask(LayerMask.GetMask("Enemy"));
+                Debug.Log(RangeCollider.GetComponent<CircleCollider2D>().OverlapCollider(x, cols));
                 if (cols.Count > 0)
                 {
                     var MaxDistance = WeaponRange + 1;
