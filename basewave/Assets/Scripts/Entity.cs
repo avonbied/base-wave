@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Could this not be an Abstract class? */
 public class Entity : MonoBehaviour {
 
     public Vector3 TargetPos;
@@ -31,7 +32,7 @@ public class Entity : MonoBehaviour {
 
 
 
-
+    // Could this be a support method for a Kill Test?
     public void Die()
     {
         if (Dead)

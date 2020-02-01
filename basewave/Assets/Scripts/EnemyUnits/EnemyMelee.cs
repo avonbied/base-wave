@@ -11,6 +11,7 @@ public class EnemyMelee : Entity {
 
 	private void FixedUpdate()
 	{
+        // Kill Test
         if (HitPoints <= 0)
         {
             Die();

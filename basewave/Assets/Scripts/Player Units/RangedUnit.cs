@@ -13,13 +13,14 @@ public class RangedUnit : Entity
 
     public void FixedUpdate()
     {
+        // Kill Test
         if (HitPoints <= 0)
         {
             Die();
             return;
         }
 
-
+        // Attack Order
         if (Vector3.Distance(transform.position, TargetPos) >= 0.1)
         {
             LookAtPosition(TargetPos);

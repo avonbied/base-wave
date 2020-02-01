@@ -14,6 +14,7 @@ public class EnemyRanged : Entity
 
     public void FixedUpdate()
     {
+        // Kill Test
         if (HitPoints <= 0)
         {
             Die();
