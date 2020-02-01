@@ -9,7 +9,7 @@ public class Entity : MonoBehaviour {
     public Transform EnemyTarget;
     public Transform RangeCollider;
     public float Speed;
-    public float HitPoints;
+    private float HitPoints;
     public float Damage;
     public float FireRate;
     public float ProjectileSpeed;
@@ -45,14 +45,16 @@ public class Entity : MonoBehaviour {
     }
 
 
-    public void Hit(float HP)
-    {
-        HitPoints -= HP;
+    public void Hit(float DamagePoints) {
+        this.HitPoints -= DamagePoints;
         //Todo Blood and Gore
     }
 
-    public void AttackBase()
-    {
+    public void Heal(float HitPoints) {
+        this.HitPoints += HitPoints;
+    }
+
+    public void AttackBase() {
         AttackingBase = true;
     }
 
