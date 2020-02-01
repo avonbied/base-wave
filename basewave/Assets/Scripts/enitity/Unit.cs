@@ -11,6 +11,6 @@ public class Unit : Entity {
 
     public void test() {
         bool temp = en.IsDead;
-        en.IsDead = temp;
+        //en.IsDead = temp;
     }
 }

@@ -12,7 +12,7 @@ public class EnemyMelee : Entity {
 	private void FixedUpdate()
 	{
         // Kill Test
-        if (this.Dead) {
+        if (this.IsDead) {
             Die();
             return;
         }

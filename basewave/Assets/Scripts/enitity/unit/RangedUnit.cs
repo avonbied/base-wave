@@ -13,7 +13,7 @@ public class RangedUnit : Entity
 
     public void FixedUpdate() {
         // Kill Test
-        if (this.Dead) {
+        if (this.IsDead) {
             Die();
             return;
         }

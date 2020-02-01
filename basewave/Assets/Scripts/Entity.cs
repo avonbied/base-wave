@@ -12,9 +12,10 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour {
 
     public Vector3 TargetPos;
+    public float Speed;
+
     public Transform EnemyTarget;
     public Transform RangeCollider;
-    public float Speed;
     private float HitPoints;
     public float Damage;
     public float FireRate;
@@ -47,6 +48,7 @@ public abstract class Entity : MonoBehaviour {
     }
 
     public void FireOnTargetRanged() {
+
     }
 
 
@@ -69,12 +71,10 @@ public abstract class Entity : MonoBehaviour {
         var x = new ContactFilter2D();
         x.SetLayerMask(LayerMask.GetMask(target));
         RangeCollider.GetComponent<CircleCollider2D>().OverlapCollider(x, cols);
-        if (cols.Count > 0)
-        {
+        if (cols.Count > 0) {
             var MaxDistance = WeaponRange + 1;
             Transform trans = null;
-            for (int i = 0; i < cols.Count; i++)
-            {
+            for (int i = 0; i < cols.Count; i += 1) {
                 var distance = Vector2.Distance(cols[i].transform.position, transform.position);
                 if (distance < MaxDistance)
                 {
@@ -82,8 +82,7 @@ public abstract class Entity : MonoBehaviour {
                     trans = cols[i].transform;
                 }
             }
-            if (trans != null)
-            {
+            if (trans != null) {
                 EnemyTarget = trans;
             }
         }
