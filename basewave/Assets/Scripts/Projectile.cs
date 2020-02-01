@@ -1,24 +1,24 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(PooledObject), typeof(Rigidbody))]
+[RequireComponent(typeof(PooledObject), typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
 {
     protected PooledObject poolLink;
-    protected Rigidbody rb;
+    protected Rigidbody2D rigidBody;
 
     private void Awake()
     {
         poolLink = GetComponent<PooledObject>();
-        rb = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    public void Reset(Vector3 position, Quaternion rotation, Vector3 velocity)
+    public void Reset(Vector2 position, Quaternion rotation, Vector2 velocity)
     {
         transform.position = position;
         transform.rotation = rotation;
-        rb.velocity = velocity;
-        rb.angularVelocity = new Vector3(0f, 0f, 0f);
+        rigidBody.velocity = velocity;
+        rigidBody.angularVelocity = 0.0f;
         transform.parent = null;
         StartCoroutine(TravelTimeKill());
     }
