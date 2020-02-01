@@ -8,12 +8,14 @@ who are trying to eat human brains (Lil Dicky's more specifically).
 ### Base
 - Fixed Layout
 - Upgradeable with _Credits_
-- Walls that indicate of the Base Health
+
+**Walls**:
+  - Walls that indicate of the Base Health
+  - Wall can be repaired between waves
 - Defense Hardpoints (amount increases with upgrades)
 
-### Defense (Humans)
-- Wall can be repaired between waves
 
+### Defense (Humans)
 **Turrets**:
   - Fixed-point towers (hard points)
 
@@ -24,8 +26,10 @@ who are trying to eat human brains (Lil Dicky's more specifically).
   - Unit costs increase with upgrades
   - Unit
 
+
 ### Offense (Aliens)
 - (**Path-driven** or **Bee-line**) Enemies
+
 
 ### Menu
 - Pause Menu
