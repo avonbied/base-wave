@@ -250,7 +250,7 @@ MonoBehaviour:
   Damage: 0
   FireRate: 0.1
   ProjectileSpeed: 5
-  BaseWeaponRange: 0
+  BaseWeaponRange: 2
   Class: 0
   SpriteOffset: 0
   AttackingBase: 0

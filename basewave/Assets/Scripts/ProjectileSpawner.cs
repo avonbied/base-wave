@@ -14,11 +14,14 @@ public class ProjectileSpawner : MonoBehaviour
     private Coroutine cor;
     private float vel = 0;
 
+    private ContactFilter2D commonFilter;
+
     Entity entity;
 
     private void Awake()
     {
         entity = GetComponent<Entity>();
+        commonFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
     }
 
     protected IEnumerator FireConsistantly()
@@ -29,8 +32,10 @@ public class ProjectileSpawner : MonoBehaviour
             if (obj == null)
                 yield break;
             obj.SetActive(true);
-            obj.GetComponent<Projectile>().Reset(transform.position, transform.rotation, transform.right * entity.ProjectileSpeed);
-
+            var proj = obj.GetComponent<Projectile>();
+            Debug.Log(entity.WeaponRange / entity.ProjectileSpeed);
+            proj.Reset(transform.position, transform.rotation, transform.right * entity.ProjectileSpeed, entity.BaseWeaponRange / entity.ProjectileSpeed);
+            proj.ContactFilter = commonFilter;
             yield return new WaitForSeconds(entity.FireRate);
         }
     }
