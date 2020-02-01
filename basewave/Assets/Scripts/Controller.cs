@@ -33,6 +33,10 @@ public class Controller : MonoBehaviour {
 
 	private void FixedUpdate()
 	{
+		if (BaseHP > MaxHP) {
+			BaseHP = MaxHP;
+			Debug.LogError("You are murdering the cows!!");
+		}
 		if (BaseHP <= 0)
 			Global.GameOver = true;
 	}

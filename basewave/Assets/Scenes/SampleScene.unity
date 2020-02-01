@@ -708,6 +708,11 @@ PrefabInstance:
       propertyPath: TargetPos.y
       value: 4.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
+        type: 3}
+      propertyPath: HitPoints
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8892485458085149152, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
         type: 3}
       propertyPath: m_Name
@@ -1172,7 +1177,7 @@ GameObject:
   - component: {fileID: 1700853840}
   - component: {fileID: 1700853839}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: HP Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1242,6 +1247,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3370761476239577701, guid: c86e030b990f53140a32f82d2ba23047,
+        type: 3}
+      propertyPath: HitPoints
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4158616671347007306, guid: c86e030b990f53140a32f82d2ba23047,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1315,6 +1325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyRangedUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6492765179494109322, guid: 2917f0a75bb95064eb7278260847fecf,
+        type: 3}
+      propertyPath: HitPoints
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6492765179494109332, guid: 2917f0a75bb95064eb7278260847fecf,
         type: 3}
