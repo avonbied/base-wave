@@ -13,8 +13,7 @@ public class RangedUnit : Entity
 
     public void FixedUpdate()
     {
-        if (HitPoints <= 0 || Global.GameOver)
-        {
+        if (this.IsDead || Global.GameOver) {
             Die();
             return;
         }
