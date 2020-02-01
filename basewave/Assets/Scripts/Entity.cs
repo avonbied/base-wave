@@ -18,7 +18,7 @@ public class Entity : MonoBehaviour {
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
     
-    public bool Dead {
+    public bool IsDead {
         get { return (this.HitPoints <= 0); }
     }
     public float SpriteOffset;
