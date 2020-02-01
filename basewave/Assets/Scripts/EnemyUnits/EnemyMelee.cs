@@ -11,7 +11,7 @@ public class EnemyMelee : Entity {
 
 	private void FixedUpdate()
 	{
-        if (HitPoints <= 0)
+        if (HitPoints <= 0 || Global.GameOver)
         {
             Die();
             return;
