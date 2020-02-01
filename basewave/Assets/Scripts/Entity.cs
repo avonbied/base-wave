@@ -9,7 +9,7 @@ public class Entity : MonoBehaviour {
     public Transform EnemyTarget;
     public Transform RangeCollider;
     public float Speed;
-    public float HitPoints;
+    private float HitPoints;
     public float Damage;
     public float FireRate;
     public float ProjectileSpeed;
@@ -17,7 +17,10 @@ public class Entity : MonoBehaviour {
     private float _WeaponRange;
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
-    public bool Dead;
+    
+    public bool IsDead {
+        get { return (this.HitPoints <= 0); }
+    }
     public float SpriteOffset;
     public bool AttackingBase = false;
 
@@ -32,11 +35,8 @@ public class Entity : MonoBehaviour {
 
 
 
-    public void Die()
-    {
-        if (Dead)
-            return;
-        Dead = true;
+    public void Die() {
+        // TODO: Implement Visual Affect & Recycle
         throw new NotImplementedException();
     }
 
@@ -45,14 +45,16 @@ public class Entity : MonoBehaviour {
     }
 
 
-    public void Hit(float HP)
-    {
-        HitPoints -= HP;
+    public void Hit(float DamagePoints) {
+        this.HitPoints -= DamagePoints;
         //Todo Blood and Gore
     }
 
-    public void AttackBase()
-    {
+    public void Heal(float HitPoints) {
+        this.HitPoints += HitPoints;
+    }
+
+    public void AttackBase() {
         AttackingBase = true;
         Global.Controller.BaseHP -= Damage * Time.fixedDeltaTime;
     }

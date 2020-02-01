@@ -12,10 +12,8 @@ public class EnemyRanged : Entity
 
     }
 
-    public void FixedUpdate()
-    {
-        if (HitPoints <= 0 || Global.GameOver)
-        {
+    public void FixedUpdate() {
+        if (this.IsDead || Global.GameOver) {
             Die();
             return;
         }
