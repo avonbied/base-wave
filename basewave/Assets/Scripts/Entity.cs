@@ -17,6 +17,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public float ProjectileSpeed;
     public float BaseWeaponRange;
     private float _WeaponRange;
+    public float TimeLastFired;
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
 
@@ -33,7 +34,12 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
 
     }
 
-    public abstract void Die();
+    public void Die()
+    {
+        //Todo Particles;
+        gameObject.SetActive(false);
+    }
+
     public abstract void FireOnTarget();
 
     public void Hit(float DamagePoints)

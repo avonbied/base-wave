@@ -14,42 +14,24 @@ public class ProjectileSpawner : MonoBehaviour
     private Coroutine cor;
     private float vel = 0;
 
-    private ContactFilter2D commonFilter;
+    private ContactFilter2D enemyFilter;
+    private ContactFilter2D friendlyFilter;
 
     Entity entity;
 
     private void Awake()
     {
         entity = GetComponent<Entity>();
-        commonFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
+        enemyFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
+        enemyFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") };
     }
 
-    protected IEnumerator FireConsistantly()
-    {
-        while (Triggered)
-        {
+    public void Fire(bool Friendly) { 
             var obj = objectPool.Rent();
-            if (obj == null)
-                yield break;
             obj.SetActive(true);
             var proj = obj.GetComponent<Projectile>();
             Debug.Log(entity.WeaponRange / entity.ProjectileSpeed);
             proj.Reset(transform.position, transform.rotation, transform.right * entity.ProjectileSpeed, entity.BaseWeaponRange / entity.ProjectileSpeed);
-            proj.ContactFilter = commonFilter;
-            yield return new WaitForSeconds(entity.FireRate);
-        }
-    }
-
-    protected virtual void Update()
-    {
-        if (Triggered && cor == null)
-        {
-            cor = StartCoroutine(FireConsistantly());
-        }
-        else if (!Triggered && cor != null)
-        {
-            StopCoroutine(cor);
-            cor = null;
-        }
+            proj.ContactFilter = Friendly?friendlyFilter:enemyFilter;
     }
 }

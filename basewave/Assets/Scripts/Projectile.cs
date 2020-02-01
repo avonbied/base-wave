@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     protected Rigidbody2D rigidBody;
     protected Collider2D projectileCollider;
     protected float flightTime;
+    public float Damage;
     public ContactFilter2D ContactFilter { get; set; }
     private List<Collider2D> Colliders = new List<Collider2D>();
 
@@ -38,6 +39,11 @@ public class Projectile : MonoBehaviour
         }
 
         projectileCollider.OverlapCollider(ContactFilter, Colliders);
+        if (Colliders.Count > 0)
+        {
+            Colliders[0].GetComponent<Entity>().Hit(Damage);
+            poolLink.Return();
+        }
 
     }
 }

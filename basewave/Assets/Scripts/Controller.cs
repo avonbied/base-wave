@@ -21,8 +21,14 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     public float MeleeSpeedModifier;
     public RectTransform rect;
 
+    public PoolManager pool;
+
 
     // Use this for initialization
+    private void Awake()
+    {
+        Global.ProjectilePool = pool;
+    }
     void Start()
     {
         Global.Controller = this;

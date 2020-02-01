@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class RangedUnit : Entity
 {
-    public override void Die()
+    ContactFilter2D Filter;
+    private void Awake()
     {
-        throw new System.NotImplementedException();
+        Filter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
     }
 
     public override void FireOnTarget()
     {
-        throw new System.NotImplementedException();
+        if (TimeLastFired + (1.0f / FireRate) <= Time.realtimeSinceStartup)
+        {
+            TimeLastFired = Time.realtimeSinceStartup;
+            var obj = Global.ProjectilePool.Rent();
+            obj.SetActive(true);
+            var proj = obj.GetComponent<Projectile>();
+            proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
+            proj.ContactFilter = Filter;
+            proj.Damage = Damage;
+        }
     }
 
     public void FixedUpdate()
@@ -41,7 +51,7 @@ public class RangedUnit : Entity
         }
         else
         {
-            if (EnemyTarget == null || Vector3.Distance(transform.position, EnemyTarget.position) > WeaponRange)
+            if (EnemyTarget == null || Vector3.Distance(transform.position, EnemyTarget.position) > WeaponRange || !EnemyTarget.gameObject.activeSelf)
             {
                 FindNewTarget("Enemy");
             }

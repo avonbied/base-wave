@@ -50,10 +50,6 @@ public class EnemyMelee : Entity
         }
     }
 
-    public override void Die()
-    {
-        throw new System.NotImplementedException();
-    }
 
     public override void FireOnTarget()
     {
