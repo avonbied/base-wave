@@ -54,6 +54,7 @@ public class Entity : MonoBehaviour {
     public void AttackBase()
     {
         AttackingBase = true;
+        Global.Controller.BaseHP -= Damage * Time.fixedDeltaTime;
     }
 
     public void LookAtPosition(Vector3 pos)
