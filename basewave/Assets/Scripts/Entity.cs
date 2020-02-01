@@ -35,11 +35,10 @@ public class Entity : MonoBehaviour {
 
 
 
-    public void Die()
-    {
-        if (Dead)
-            return;
-        Dead = true;
+    public void Die() {
+        if (this.IsDead) {
+            // TODO: Implement Visual Affect & Recycle 
+        }
         throw new NotImplementedException();
     }
 
