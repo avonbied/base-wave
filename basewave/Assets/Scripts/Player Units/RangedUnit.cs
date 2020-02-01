@@ -22,14 +22,20 @@ public class RangedUnit : Entity
 
         if (Vector3.Distance(transform.position, TargetPos) >= 0.1)
         {
-            var dif = TargetPos - transform.position;
-            var sign = (TargetPos.y < transform.position.y) ? -1.0f : 1.0f;
-            transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(Vector3.right, dif) + 90) * sign;
+            LookAtPosition(TargetPos);
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
         }
         else
         {
-
+            if (EnemyTarget == null || Vector3.Distance(transform.position, EnemyTarget.position) > WeaponRange)
+            {
+                FindNewTarget("Enemy");
+            }
+            if (EnemyTarget != null)
+            {
+                FireOnTargetRanged();
+                LookAtPosition(EnemyTarget.position);
+            }
         }
 
         //if (EnemyTarget != null)
