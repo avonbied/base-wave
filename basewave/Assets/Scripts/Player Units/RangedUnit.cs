@@ -4,20 +4,33 @@ using UnityEngine;
 
 public class RangedUnit : Entity
 {
-
-    // Use this for initialization
-    void Start()
+    ContactFilter2D Filter;
+    private void Awake()
     {
+        Filter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
+    }
 
+    public override void FireOnTarget()
+    {
+        if (TimeLastFired + (1.0f / FireRate) <= Time.realtimeSinceStartup)
+        {
+            TimeLastFired = Time.realtimeSinceStartup;
+            var obj = Global.ProjectilePool.Rent();
+            obj.SetActive(true);
+            var proj = obj.GetComponent<Projectile>();
+            proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
+            proj.ContactFilter = Filter;
+            proj.Damage = Damage;
+        }
     }
 
     public void FixedUpdate()
     {
-        if (this.IsDead || Global.GameOver) {
+        if (this.IsDead || Global.GameOver)
+        {
             Die();
             return;
         }
-
 
         if (Vector3.Distance(transform.position, TargetPos) >= 0.1)
         {
@@ -32,17 +45,19 @@ public class RangedUnit : Entity
                 WeaponRange = BaseWeaponRange * 1.5f;
             }
             else
+            {
                 WeaponRange = BaseWeaponRange;
+            }
         }
         else
         {
-            if (EnemyTarget == null || Vector3.Distance(transform.position, EnemyTarget.position) > WeaponRange)
+            if (EnemyTarget == null || Vector3.Distance(transform.position, EnemyTarget.position) > WeaponRange || !EnemyTarget.gameObject.activeSelf)
             {
                 FindNewTarget("Enemy");
             }
             if (EnemyTarget != null)
             {
-                FireOnTargetRanged();
+                FireOnTarget();
                 LookAtPosition(EnemyTarget.position);
             }
         }

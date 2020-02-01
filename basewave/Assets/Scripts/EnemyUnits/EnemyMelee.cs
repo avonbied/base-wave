@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMelee : Entity {
+public class EnemyMelee : Entity
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-
-	private void FixedUpdate()
-	{
+    private void FixedUpdate()
+    {
         if (this.IsDead || Global.GameOver)
         {
             Die();
@@ -30,7 +26,7 @@ public class EnemyMelee : Entity {
         {
             if (Vector3.Distance(transform.position, EnemyTarget.position) < WeaponRange * .4f)
             {
-                FireOnTargetRanged();
+                FireOnTarget();
                 LookAtPosition(EnemyTarget.position);
             }
             else
@@ -52,5 +48,11 @@ public class EnemyMelee : Entity {
                 AttackBase();
             }
         }
+    }
+
+
+    public override void FireOnTarget()
+    {
+        throw new System.NotImplementedException();
     }
 }

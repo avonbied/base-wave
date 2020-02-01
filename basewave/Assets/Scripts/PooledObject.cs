@@ -27,7 +27,7 @@ public class PooledObject : MonoBehaviour
         }
     }
 
-    public void Return()
+    public virtual void Return()
     {
         gameObject.transform.parent = pool.transform;
         gameObject.SetActive(false);

@@ -65,4 +65,10 @@ public class PoolManager : MonoBehaviour
             isPoolShuttingDown = false;
         }
     }
+
+
+    private void OnApplicationQuit()
+    {
+        isPoolShuttingDown = true;
+    }
 }

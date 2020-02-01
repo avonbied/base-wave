@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class EnemyRanged : Entity
 {
-
-    // Use this for initialization
-
-    void Start()
+    ContactFilter2D Filter;
+    private void Awake()
     {
-
+        Filter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
     }
-
-    public void FixedUpdate() {
-        if (this.IsDead || Global.GameOver) {
+    public void FixedUpdate()
+    {
+        if (this.IsDead || Global.GameOver)
+        {
             Die();
             return;
         }
@@ -28,7 +27,7 @@ public class EnemyRanged : Entity
 
         if (EnemyTarget != null)
         {
-            FireOnTargetRanged();
+            FireOnTarget();
             LookAtPosition(EnemyTarget.position);
         }
         else
@@ -39,6 +38,20 @@ public class EnemyRanged : Entity
             {
                 AttackBase();
             }
+        }
+    }
+
+
+    public override void FireOnTarget()
+    {
+        if (TimeLastFired + (1.0f / FireRate) <= Time.realtimeSinceStartup)
+        {
+            TimeLastFired = Time.realtimeSinceStartup;
+            var obj = Global.ProjectilePool.Rent();
+            obj.SetActive(true);
+            var proj = obj.GetComponent<Projectile>();
+            proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
+            proj.ContactFilter = Filter;
         }
     }
 }
