@@ -5,15 +5,10 @@ using UnityEngine;
 public class EnemyRanged : Entity
 {
 
-    // Use this for initialization
-
-    void Start()
+    public void FixedUpdate()
     {
-
-    }
-
-    public void FixedUpdate() {
-        if (this.IsDead || Global.GameOver) {
+        if (this.IsDead || Global.GameOver)
+        {
             Die();
             return;
         }
@@ -28,7 +23,7 @@ public class EnemyRanged : Entity
 
         if (EnemyTarget != null)
         {
-            FireOnTargetRanged();
+            FireOnTarget();
             LookAtPosition(EnemyTarget.position);
         }
         else
@@ -40,5 +35,15 @@ public class EnemyRanged : Entity
                 AttackBase();
             }
         }
+    }
+
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void FireOnTarget()
+    {
+        throw new System.NotImplementedException();
     }
 }
