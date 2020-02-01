@@ -37,3 +37,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 \.vscode/
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal

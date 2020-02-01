@@ -22,14 +22,40 @@ public class RangedUnit : Entity
 
         if (Vector3.Distance(transform.position, TargetPos) >= 0.1)
         {
-            var dif = TargetPos - transform.position;
-            var sign = (TargetPos.y < transform.position.y) ? -1.0f : 1.0f;
-            transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(Vector3.right, dif) + 90) * sign;
+            LookAtPosition(TargetPos);
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
         }
         else
         {
-
+            if (EnemyTarget == null || Vector3.Distance(transform.position, EnemyTarget.position) > WeaponRange)
+            {
+                EnemyTarget = null;
+                List<Collider2D> cols = new List<Collider2D>();
+                Debug.Log(RangeCollider.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.NameToLayer("Enemy") }, cols));
+                if (cols.Count > 0)
+                {
+                    var MaxDistance = WeaponRange + 1;
+                    Transform trans = null;
+                    for (int i = 0; i<cols.Count; i++)
+                    {
+                        var distance = Vector2.Distance(cols[i].transform.position, transform.position);
+                        if (distance < MaxDistance)
+                        {
+                            MaxDistance = distance;
+                            trans = cols[i].transform;
+                        }
+                    }
+                    if (trans != null)
+                    {
+                        EnemyTarget = trans;
+                    }
+                }
+            }
+            if (EnemyTarget != null)
+            {
+                FireOnTargetRanged();
+                LookAtPosition(EnemyTarget.position);
+            }
         }
 
         //if (EnemyTarget != null)
