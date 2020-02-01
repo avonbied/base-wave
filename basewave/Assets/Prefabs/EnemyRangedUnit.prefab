@@ -170,13 +170,12 @@ MonoBehaviour:
   EnemyTarget: {fileID: 0}
   RangeCollider: {fileID: 6492765178967648749}
   Speed: 1
-  HitPoints: 1
+  HitPoints: 50
   Damage: 0
   FireRate: 0
   ProjectileSpeed: 0
   BaseWeaponRange: 2
   Class: 2
-  Dead: 0
   SpriteOffset: 0
   AttackingBase: 0
 --- !u!58 &6492765179494109333
