@@ -3,14 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* Could this not be an Abstract class? */
-public class Entity : MonoBehaviour {
+/* Could this not be an Abstract class?
+    Logic Attributes:
+    - {EntityClass, Position, Speed, HitPoints, IsDead}
+    View Attributes:
+    - {SpriteOffset}
+*/
+public abstract class Entity : MonoBehaviour {
 
     public Vector3 TargetPos;
     public Transform EnemyTarget;
     public Transform RangeCollider;
     public float Speed;
-    public float HitPoints;
+    private float HitPoints;
     public float Damage;
     public float FireRate;
     public float ProjectileSpeed;
@@ -18,7 +23,6 @@ public class Entity : MonoBehaviour {
     private float _WeaponRange;
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
-    public bool Dead;
     public float SpriteOffset;
     public bool AttackingBase = false;
 
@@ -27,30 +31,24 @@ public class Entity : MonoBehaviour {
 		
 	}
 
-
-
-
-
-
-    // Could this be a support method for a Kill Test?
-    public void Die()
-    {
-        if (Dead)
-            return;
-        Dead = true;
-        throw new NotImplementedException();
+    public bool Dead {
+        get { return (this.HitPoints <= 0); }
+        //private set {}
     }
 
-    public void FireOnTargetRanged()
-    {
-    }
-
-
-    public void Hit(float HP)
-    {
+    public void Hit(float HP) {
         HitPoints -= HP;
         //Todo Blood and Gore
     }
+
+    // Could this be a support method for a Kill Test?
+    public void Die() {
+        throw new NotImplementedException();
+    }
+
+    public void FireOnTargetRanged() {
+    }
+
 
     public void AttackBase()
     {

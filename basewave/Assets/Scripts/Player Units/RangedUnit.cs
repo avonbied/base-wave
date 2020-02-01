@@ -11,11 +11,9 @@ public class RangedUnit : Entity
 
     }
 
-    public void FixedUpdate()
-    {
+    public void FixedUpdate() {
         // Kill Test
-        if (HitPoints <= 0)
-        {
+        if (this.Dead) {
             Die();
             return;
         }
