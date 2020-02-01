@@ -17,8 +17,8 @@ TagManager:
   - FriendlyRange
   - Enemy
   - EnemyRange
-  - 
-  - 
+  - Wall
+  - Turret
   - 
   - 
   - 

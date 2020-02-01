@@ -13,10 +13,13 @@ public class Entity : MonoBehaviour {
     public float Damage;
     public float FireRate;
     public float ProjectileSpeed;
-    public float WeaponRange;
+    public float BaseWeaponRange;
+    private float _WeaponRange;
+    public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
     public bool Dead;
     public float SpriteOffset;
+    public bool AttackingBase = false;
 
 	// Use this for initialization
 	void Start () {
@@ -46,6 +49,11 @@ public class Entity : MonoBehaviour {
     {
         HitPoints -= HP;
         //Todo Blood and Gore
+    }
+
+    public void AttackBase()
+    {
+        AttackingBase = true;
     }
 
     public void LookAtPosition(Vector3 pos)

@@ -19,6 +19,11 @@ public class EnemyRanged : Entity
             Die();
             return;
         }
+        if (AttackingBase)
+        {
+            AttackBase();
+            return;
+        }
 
         if (EnemyTarget == null || Vector3.Distance(transform.position, EnemyTarget.position) > WeaponRange)
             FindNewTarget("Friendly");
@@ -32,6 +37,10 @@ public class EnemyRanged : Entity
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
             LookAtPosition(TargetPos);
+            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") }, new List<Collider2D>()) > 0 || transform.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") }, new List<Collider2D>()) > 0)
+            {
+                AttackBase();
+            }
         }
     }
 }

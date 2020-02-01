@@ -174,10 +174,11 @@ MonoBehaviour:
   Damage: 0
   FireRate: 0
   ProjectileSpeed: 0
-  WeaponRange: 2
+  BaseWeaponRange: 2
   Class: 2
   Dead: 0
   SpriteOffset: 0
+  AttackingBase: 0
 --- !u!58 &6492765179494109333
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -193,7 +194,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.64
+  m_Radius: 0.16
 --- !u!50 &6492765179494109334
 Rigidbody2D:
   serializedVersion: 4
