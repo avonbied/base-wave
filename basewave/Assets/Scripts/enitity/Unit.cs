@@ -10,7 +10,7 @@ public class Unit : Entity {
     public Entity en;
 
     public void test() {
-        bool temp = en.Dead;
-        en.Dead = temp;
+        bool temp = en.IsDead;
+        en.IsDead = temp;
     }
 }

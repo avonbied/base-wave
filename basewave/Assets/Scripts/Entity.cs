@@ -7,7 +7,7 @@ using UnityEngine;
     Logic Attributes:
     - {EntityClass, Position, Speed, HitPoints, IsDead}
     View Attributes:
-    - {SpriteOffset}
+    - {SpriteOffset, Death, Heal, Attack}
 */
 public abstract class Entity : MonoBehaviour {
 
@@ -31,7 +31,7 @@ public abstract class Entity : MonoBehaviour {
 		
 	}
 
-    public bool Dead {
+    public bool IsDead {
         get { return (this.HitPoints <= 0); }
         //private set {}
     }
