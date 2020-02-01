@@ -29,29 +29,7 @@ public class RangedUnit : Entity
         {
             if (EnemyTarget == null || Vector3.Distance(transform.position, EnemyTarget.position) > WeaponRange)
             {
-                EnemyTarget = null;
-                List<Collider2D> cols = new List<Collider2D>();
-                var x = new ContactFilter2D();
-                x.SetLayerMask(LayerMask.GetMask("Enemy"));
-                Debug.Log(RangeCollider.GetComponent<CircleCollider2D>().OverlapCollider(x, cols));
-                if (cols.Count > 0)
-                {
-                    var MaxDistance = WeaponRange + 1;
-                    Transform trans = null;
-                    for (int i = 0; i<cols.Count; i++)
-                    {
-                        var distance = Vector2.Distance(cols[i].transform.position, transform.position);
-                        if (distance < MaxDistance)
-                        {
-                            MaxDistance = distance;
-                            trans = cols[i].transform;
-                        }
-                    }
-                    if (trans != null)
-                    {
-                        EnemyTarget = trans;
-                    }
-                }
+                FindNewTarget("Enemy");
             }
             if (EnemyTarget != null)
             {
