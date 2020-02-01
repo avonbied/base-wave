@@ -20,6 +20,7 @@ who are trying to eat human brains (Lil Dicky's more specifically).
   - Fixed-point towers (hard points)
 
 **Units**:
+  - Types: Laser Beams, Swordsmen, Plasma Casters, and Shotgunners
   - Units can be selected
   - Units shoot outwards from the wall direction or along the tower radius
   - Units are not focused, walls are
@@ -28,6 +29,8 @@ who are trying to eat human brains (Lil Dicky's more specifically).
 
 
 ### Offense (Aliens)
+**Units**:
+  - Bladez, Lazerz, Plazmaz, Boomerz, and Zhrapnelz
 - (**Path-driven** or **Bee-line**) Enemies
 
 
