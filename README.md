@@ -6,11 +6,30 @@ who are trying to eat human brains (Lil Dicky's more specifically).
 ## Components:
 
 ### Base
-- Fixed Upgradeable Walls
-- 
+- Fixed Layout
+- Upgradeable with _Credits_
+- Walls that indicate of the Base Health
+- Defense Hardpoints (amount increases with upgrades)
 
 ### Defense (Humans)
-- Fixed-point towers
-- Path-driven Units ()
+- Wall can be repaired between waves
+
+**Turrets**:
+  - Fixed-point towers (hard points)
+
+**Units**:
+  - Units can be selected
+  - Units shoot outwards from the wall direction or along the tower radius
+  - Units are not focused, walls are
+  - Unit costs increase with upgrades
+  - Unit
 
 ### Offense (Aliens)
+- (**Path-driven** or **Bee-line**) Enemies
+
+### Menu
+- Pause Menu
+  - Settings
+  - Quit
+- Upgrade Menu
+  - 
