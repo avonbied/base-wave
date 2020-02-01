@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, IDamageable, IHealable
 {
 
     public Vector3 TargetPos;
@@ -50,7 +50,7 @@ public abstract class Entity : MonoBehaviour
     public void AttackBase()
     {
         AttackingBase = true;
-        Global.Controller.BaseHP -= Damage * Time.fixedDeltaTime;
+        Global.Controller.Hit(Damage * Time.fixedDeltaTime);
     }
 
     public void LookAtPosition(Vector3 pos)
