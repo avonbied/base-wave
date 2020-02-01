@@ -12,4 +12,5 @@
 public static class Global
 {
     public static bool GameOver = false;
+    public static Controller Controller;
 }

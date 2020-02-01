@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour {
     public Transform EnemyTarget;
     public Transform RangeCollider;
     public float Speed;
+    [SerializeField]
     private float HitPoints;
     public float Damage;
     public float FireRate;
@@ -56,6 +57,7 @@ public class Entity : MonoBehaviour {
 
     public void AttackBase() {
         AttackingBase = true;
+        Global.Controller.BaseHP -= Damage * Time.fixedDeltaTime;
     }
 
     public void LookAtPosition(Vector3 pos)
