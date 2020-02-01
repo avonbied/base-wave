@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class RangedUnit : Entity
 {
-
-    // Use this for initialization
-    void Start()
+    public override void Die()
     {
+        throw new System.NotImplementedException();
+    }
 
+    public override void FireOnTarget()
+    {
+        throw new System.NotImplementedException();
     }
 
     public void FixedUpdate()
     {
-        if (this.IsDead || Global.GameOver) {
+        if (this.IsDead || Global.GameOver)
+        {
             Die();
             return;
         }
-
 
         if (Vector3.Distance(transform.position, TargetPos) >= 0.1)
         {
@@ -32,7 +35,9 @@ public class RangedUnit : Entity
                 WeaponRange = BaseWeaponRange * 1.5f;
             }
             else
+            {
                 WeaponRange = BaseWeaponRange;
+            }
         }
         else
         {
@@ -42,7 +47,7 @@ public class RangedUnit : Entity
             }
             if (EnemyTarget != null)
             {
-                FireOnTargetRanged();
+                FireOnTarget();
                 LookAtPosition(EnemyTarget.position);
             }
         }

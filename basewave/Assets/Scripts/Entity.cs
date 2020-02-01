@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : MonoBehaviour {
+public abstract class Entity : MonoBehaviour
+{
 
     public Vector3 TargetPos;
     public Transform EnemyTarget;
@@ -18,44 +19,36 @@ public class Entity : MonoBehaviour {
     private float _WeaponRange;
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
-    
-    public bool IsDead {
+
+    public bool IsDead
+    {
         get { return (this.HitPoints <= 0); }
     }
     public float SpriteOffset;
     public bool AttackingBase = false;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-
-
-
-
-
-
-
-    public void Die() {
-        // TODO: Implement Visual Affect & Recycle
-        throw new NotImplementedException();
-    }
-
-    public void FireOnTargetRanged()
+    // Use this for initialization
+    void Start()
     {
+
     }
 
+    public abstract void Die();
+    public abstract void FireOnTarget();
 
-    public void Hit(float DamagePoints) {
+    public void Hit(float DamagePoints)
+    {
         this.HitPoints -= DamagePoints;
         //Todo Blood and Gore
     }
 
-    public void Heal(float HitPoints) {
+    public void Heal(float HitPoints)
+    {
         this.HitPoints += HitPoints;
     }
 
-    public void AttackBase() {
+    public void AttackBase()
+    {
         AttackingBase = true;
         Global.Controller.BaseHP -= Damage * Time.fixedDeltaTime;
     }
