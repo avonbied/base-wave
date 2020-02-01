@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour {
     public Transform EnemyTarget;
     public Transform RangeCollider;
     public float Speed;
+    [SerializeField]
     private float HitPoints;
     public float Damage;
     public float FireRate;
