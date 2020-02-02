@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Controller : MonoBehaviour, IDamageable, IHealable
 {
 
@@ -25,12 +24,47 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
 
     Camera cam;
 
+    [Header("Shop")]
+
+    public int CostShotgun;
+    public int CostMelee;
+    public int CostLaser;
+    public int CostPlasma;
+
+    public GameObject PrefabShotgun;
+    public GameObject PrefabLaser;
+    public GameObject PrefabMelee;
+    public GameObject PrefabPlasma;
+
+    public void BuyRangedShotgun()
+    {
+        if (AttemptToBuy(CostShotgun))
+            Instantiate(PrefabShotgun, Vector3.zero, new Quaternion());
+    }
+    public void BuyMelee()
+    {
+        if (AttemptToBuy(CostMelee))
+            Instantiate(PrefabMelee, Vector3.zero, new Quaternion());
+    }
+    public void BuyRangedLaser()
+    {
+        if (AttemptToBuy(CostLaser))
+            Instantiate(PrefabLaser, Vector3.zero, new Quaternion());
+    }
+    public void BuyRangedPlasma()
+    {
+        if (AttemptToBuy(CostPlasma))
+            Instantiate(PrefabPlasma, Vector3.zero, new Quaternion());
+    }
+
 
     // Use this for initialization
     private void Awake()
     {
         Global.ProjectilePool = pool;
+        Global.UnitSpawner = GetComponent<UnitSpawner>();
     }
+
     void Start()
     {
         Global.Controller = this;

@@ -223,6 +223,14 @@ MonoBehaviour:
   MeleeSpeedModifier: 1
   rect: {fileID: 612421983}
   pool: {fileID: 9745185}
+  CostShotgun: 0
+  CostMelee: 0
+  CostLaser: 0
+  CostPlasma: 0
+  PrefabShotgun: {fileID: 0}
+  PrefabLaser: {fileID: 0}
+  PrefabMelee: {fileID: 0}
+  PrefabPlasma: {fileID: 0}
 --- !u!4 &9745184
 Transform:
   m_ObjectHideFlags: 0
@@ -1101,7 +1109,7 @@ PrefabInstance:
     - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
         type: 3}
       propertyPath: HitPoints
-      value: 75
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
         type: 3}
@@ -1112,6 +1120,31 @@ PrefabInstance:
         type: 3}
       propertyPath: BaseWeaponRange
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
+        type: 3}
+      propertyPath: TargetPos.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
+        type: 3}
+      propertyPath: TargetPos.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
+        type: 3}
+      propertyPath: TargetPosDesignated
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
+        type: 3}
+      propertyPath: Damage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
+        type: 3}
+      propertyPath: Speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7771851563374405175, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
         type: 3}

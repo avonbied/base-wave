@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 // TODO - implement menu
 public class MenuManager : MonoBehaviour {
     // Start is called before the first frame update
-
     public void StartMenu() {
         SceneManager.LoadScene("StartScene");
     }
