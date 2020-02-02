@@ -12,6 +12,7 @@ public class EntityRanged : Entity
             var obj = Global.ProjectilePool.Rent();
             obj.SetActive(true);
             var proj = obj.GetComponent<Projectile>();
+            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaShoot, this.transform.position, transform.right);
             proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
             proj.ContactFilter = filter;
             proj.Damage = Damage;
