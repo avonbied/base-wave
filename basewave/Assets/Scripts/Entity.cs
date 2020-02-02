@@ -44,7 +44,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     {
         //Todo Particles;
         Global.Controller.Credits += CreditWorth;
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     public abstract void FireOnTarget(ContactFilter2D filter);

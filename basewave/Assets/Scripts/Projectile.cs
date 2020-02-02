@@ -45,15 +45,11 @@ public class Projectile : MonoBehaviour
             poolLink.Return();
         }
 
-
-        if (false)//There seems to be some performance overhead correlating to projectiles
+        projectileCollider.OverlapCollider(ContactFilter, Colliders);
+        if (Colliders.Count > 0)
         {
-            projectileCollider.OverlapCollider(ContactFilter, Colliders);
-            if (Colliders.Count > 0)
-            {
-                Colliders[0].GetComponent<Entity>().Hit(Damage);
-                poolLink.Return();
-            }
+            Colliders[0].GetComponent<Entity>().Hit(Damage);
+            poolLink.Return();
         }
 
 
