@@ -28,7 +28,8 @@ public class EntityRanged : Entity
                         obj.SetActive(true);
                         var proj = obj.GetComponent<Projectile>();
                         ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaShoot, this.transform.position, transform.right);
-                        proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, WeaponRange*4*Time.fixedDeltaTime*Speed,true);
+
+                        proj.Reset(transform.position, transform.rotation*Quaternion.Euler(0,0,8*Random.value-8*Random.value), ProjectileSpeed, WeaponRange*4*Time.fixedDeltaTime*Speed,true);
                         proj.ContactFilter = filter;
                         proj.Damage = Damage;
                         proj.Friendly = Friendly;
@@ -135,12 +136,13 @@ public class EntityRanged : Entity
                         float spreadangle = 35f;
                         for (float f = -1f; f <= 1f; f += (2f / (pelletcount-1)))
                         {
-                            Vector3 dire = ((dir * Mathf.Cos((Mathf.PI * 2f * f * (spreadangle / 360f)))) + (dir * Mathf.Sin((Mathf.PI * 2f * f * (spreadangle / 360f)))));
+                            //Vector3 dire = ((dir * Mathf.Cos((Mathf.PI * 2f * f * (spreadangle / 360f)))) + (dir * Mathf.Sin((Mathf.PI * 2f * f * (spreadangle / 360f)))));
                             var obj = Global.ProjectilePool.Rent();
                             obj.SetActive(true);
                             var proj = obj.GetComponent<Projectile>();
-
-                            proj.Reset(transform.position, transform.rotation, dir * ProjectileSpeed, WeaponRange * 4 * Time.fixedDeltaTime * Speed,true);
+                            proj.transform.rotation = this.transform.rotation;
+                            proj.transform.Rotate(0f, f * (spreadangle / 360f), 0f,Space.World);
+                            proj.Reset(transform.position, proj.transform.rotation, ProjectileSpeed, WeaponRange * 4 * Time.fixedDeltaTime * Speed,true);
                             proj.ContactFilter = filter;
                             proj.Damage = Damage;
                             proj.Friendly = Friendly;

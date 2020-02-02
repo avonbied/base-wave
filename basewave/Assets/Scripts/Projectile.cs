@@ -29,12 +29,13 @@ public class Projectile : MonoBehaviour
         
     }
 
-    public virtual void Reset(Vector2 position, Quaternion rotation, Vector2 velocity, float flightTime,bool isshotgun)
+
+    
     {
         this.flightTime = flightTime;
         transform.position = position;
         transform.rotation = rotation;
-        rigidBody.velocity = velocity;
+        rigidBody.velocity = transform.right*velocity;
         rigidBody.angularVelocity = 0.0f;
         transform.parent = null;
         IsShotgunProjectile = isshotgun;
