@@ -31,6 +31,7 @@ public class Projectile : MonoBehaviour
 
 
     
+    public virtual void Reset(Vector2 position, Quaternion rotation, float velocity, float flightTime, bool isshotgun)
     {
         this.flightTime = flightTime;
         transform.position = position;

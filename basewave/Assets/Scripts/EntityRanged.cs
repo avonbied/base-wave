@@ -30,6 +30,7 @@ public class EntityRanged : Entity
                         ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaShoot, this.transform.position, transform.right);
 
                         proj.Reset(transform.position, transform.rotation*Quaternion.Euler(0,0,8*Random.value-8*Random.value), ProjectileSpeed, WeaponRange*4*Time.fixedDeltaTime*Speed,true);
+
                         proj.ContactFilter = filter;
                         proj.Damage = Damage;
                         proj.Friendly = Friendly;
