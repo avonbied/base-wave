@@ -64,6 +64,18 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     {
         AttackingBase = true;
         Global.Controller.Hit(Damage * Time.fixedDeltaTime);
+        ParticleManager.EmitAt(ParticleManager.TheParticleManager.WallHit,1, transform.position+transform.right*.2f,new Quaternion());
+        if (Class == ClassType.SuicideBomber)
+        {
+            Explode();
+        }
+    }
+
+
+
+    public void Explode()
+    {
+        
     }
 
     public void LookAtPosition(Vector3 pos)
