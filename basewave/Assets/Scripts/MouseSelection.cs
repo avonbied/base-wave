@@ -84,13 +84,13 @@ public class MouseSelection : MonoBehaviour
             {
                 foreach (var col in SelectedColliders)
                 {
-                    col.GetComponent<SpriteRenderer>().color = Color.white;
+                    col.GetComponentInChildren<SpriteRenderer>().color = Color.white;
                 }
                 SelectedColliders.Clear();
             }
             foreach (var collider in FirstPassColliders)
             {
-                collider.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.blue;
+                collider.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
             }
             SelectedColliders.AddRange(FirstPassColliders);
             transform.localScale = originalScale;
