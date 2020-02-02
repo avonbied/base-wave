@@ -28,10 +28,11 @@ public class EntityRanged : Entity
                         obj.SetActive(true);
                         var proj = obj.GetComponent<Projectile>();
                         ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaShoot, this.transform.position, transform.right);
-                        proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, WeaponRange*4*Time.fixedDeltaTime*Speed);
+                        proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, WeaponRange*4*Time.fixedDeltaTime*Speed,true);
                         proj.ContactFilter = filter;
                         proj.Damage = Damage;
                         proj.Friendly = Friendly;
+                        proj.IsShotgunProjectile = false;
                     }
 
 
@@ -126,41 +127,27 @@ public class EntityRanged : Entity
                     if (TimeLastFired + (1.0f / FireRate) <= Time.realtimeSinceStartup)
                     {
                         TimeLastFired = Time.realtimeSinceStartup;
-                        ParticleManager.EmitAt(ParticleManager.TheParticleManager.ShotgunBlast, this.transform.position, transform.right);
-                        Physics2D.OverlapCircle(new Vector2(this.transform.position.x, this.transform.position.y), WeaponRange, filter,colliderhitlist);
-                        foreach (Collider2D col in colliderhitlist)
-                        {
-
-                            hitentity = col.GetComponent<Entity>();
-                            if ((hitentity != null))
-                            {
-                                    Vector2 dif = new Vector2(col.transform.position.x, col.transform.position.y) - new Vector2(this.transform.position.x, this.transform.position.y);
-                                    float mag = dif.magnitude;
-                                    float mr = 1f - (mag / WeaponRange);
-                                    float dot = Vector2.Dot(new Vector2(transform.right.x,transform.right.y).normalized,dif.normalized);
-                                    if (dot > .25f) {
-                                        ParticleManager.EmitAt(ParticleManager.TheParticleManager.ShotgunPelletImpact, col.transform.position, -dif.normalized);
-                                        hitentity.Hit(Damage * mr);
-                                    }
-                                    
-                                    
-                                }
-                            }
-                            
-                            
-
-                        }
-                        /*
                         // Borrows a projectile from the Object Pool
-                        var obj = Global.ProjectilePool.Rent();
-                        obj.SetActive(true);
-                        var proj = obj.GetComponent<Projectile>();
-                        
-                        proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
-                        proj.ContactFilter = filter;
-                        proj.Damage = Damage;
-                        proj.Friendly = this.Friendly;
-                        */
+                        ParticleManager.EmitAt(ParticleManager.TheParticleManager.ShotgunBlast, this.transform.position, transform.right);
+                        int pelletcount = 7;
+                        Vector3 dir = transform.right;
+                        Vector3 crs = Vector3.Cross(transform.right, transform.forward);
+                        float spreadangle = 35f;
+                        for (float f = -1f; f <= 1f; f += (2f / (pelletcount-1)))
+                        {
+                            Vector3 dire = ((dir * Mathf.Cos((Mathf.PI * 2f * f * (spreadangle / 360f)))) + (dir * Mathf.Sin((Mathf.PI * 2f * f * (spreadangle / 360f)))));
+                            var obj = Global.ProjectilePool.Rent();
+                            obj.SetActive(true);
+                            var proj = obj.GetComponent<Projectile>();
+
+                            proj.Reset(transform.position, transform.rotation, dir * ProjectileSpeed, WeaponRange * 4 * Time.fixedDeltaTime * Speed,true);
+                            proj.ContactFilter = filter;
+                            proj.Damage = Damage;
+                            proj.Friendly = Friendly;
+                            
+                        }
+                    }
+                    
                     }
                     break;
                 }
