@@ -93,6 +93,7 @@ public class Projectile : MonoBehaviour
         if (Colliders.Count > 0)
         {
             Colliders[0].GetComponent<Entity>().Hit(Damage);
+            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact, this.transform.position);
             poolLink.Return();
         }
     }
