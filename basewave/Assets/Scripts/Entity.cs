@@ -20,10 +20,11 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     private float _WeaponRange;
     public float TimeLastFired;
 
+    public bool Friendly = false;
+
     public float CreditWorth;
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
-    public bool Friendly = false;
     
     /// <summary>
     ///  Used for collider checking this reused so we allocate less memory.
@@ -47,7 +48,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
         Destroy(gameObject);
     }
 
-    public abstract void FireOnTarget(ContactFilter2D filter);
+    public abstract void FireOnTarget(ContactFilter2D filter, bool Friendly);
 
     public void Hit(float DamagePoints)
     {

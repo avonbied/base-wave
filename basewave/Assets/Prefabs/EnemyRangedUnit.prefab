@@ -175,12 +175,12 @@ MonoBehaviour:
   HitPoints: 50
   Damage: 2
   FireRate: 0.25
-  ProjectileSpeed: 10
+  ProjectileSpeed: 100
   BaseWeaponRange: 2
   TimeLastFired: 0
+  Friendly: 0
   CreditWorth: 0
   Class: 2
-  Friendly: 0
   SpriteOffset: -90
   AttackingBase: 0
 --- !u!58 &6492765179494109333
