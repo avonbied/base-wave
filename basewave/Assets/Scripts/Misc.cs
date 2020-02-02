@@ -16,4 +16,5 @@ public static class Global
     public static Controller Controller;
 
     public static PoolManager ProjectilePool;
+    public static UnitSpawner UnitSpawner;
 }

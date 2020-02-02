@@ -25,7 +25,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public float CreditWorth;
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
-    
+
     /// <summary>
     ///  Used for collider checking this reused so we allocate less memory.
     /// </summary>
@@ -40,11 +40,49 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public float SpriteOffset;
     public bool AttackingBase = false;
 
+    protected void Start()
+    {
+        if (Friendly)
+        {
+            Damage += 0.17f * Damage * (Time.timeSinceLevelLoad / 10);
+        }
+        else
+        {
+            HitPoints += 0.15f * HitPoints * (Time.timeSinceLevelLoad / 10);
+        }
+    }
 
     public void Die()
     {
+        float points = 0;
+
         //Todo Particles;
-        Global.Controller.Credits += CreditWorth;
+        switch (Class)
+        {
+            case ClassType.Melee:
+                points += 20;
+                break;
+            case ClassType.RangedBeam:
+                points += 40;
+                break;
+            case ClassType.RangedMortar:
+                points += 80;
+                break;
+            case ClassType.RangedProjectile:
+                points += 20;
+                break;
+            case ClassType.Shotgun:
+                points += 30;
+                break;
+            case ClassType.SuicideBomber:
+                points += 20;
+                break;
+        }
+        points -= 0.05f * points * (Time.timeSinceLevelLoad / 10);
+
+        Global.Controller.Credits += points;
+
+        Global.UnitSpawner.CurrentOnScreenCount -= 1;
         Destroy(gameObject);
     }
 

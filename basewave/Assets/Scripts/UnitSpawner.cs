@@ -7,6 +7,7 @@ public class UnitSpawner : MonoBehaviour
     public int[] SpawnRuntimeRatio;
 
     public int StartSpawnUnitCount;
+
     public float SpawnRuntimeTime;
     public int SpawnRuntimeUnitCount;
 
@@ -20,7 +21,14 @@ public class UnitSpawner : MonoBehaviour
 
     public int TotalWaveUnitCount;
 
-    private int currentWaveUnitCount = 0;
+    private int currentWaveSpawnedCount = 0;
+
+    public int CurrentOnScreenCount = 0;
+
+    private float IncreaseTimer = 1;
+
+    public int TotalUnitSpawnPerCap = 15;
+    public float FinalMiniumSpawnRateTime = 0.1f;
 
     private void Start()
     {
@@ -49,6 +57,22 @@ public class UnitSpawner : MonoBehaviour
     private void Update()
     {
         spawnCounter -= Time.deltaTime;
+        IncreaseTimer -= Time.deltaTime;
+
+        if (IncreaseTimer <= 0)
+        {
+            IncreaseTimer = 2;
+            if (SpawnRuntimeUnitCount < TotalUnitSpawnPerCap)
+            {
+                SpawnRuntimeUnitCount += 1;
+            }
+            if (SpawnRuntimeTime > FinalMiniumSpawnRateTime)
+            {
+                SpawnRuntimeTime *= 0.95f;
+                SpawnRuntimeTime = FinalMiniumSpawnRateTime;
+            }
+        }
+
         if (spawnCounter <= 0)
         {
             spawnCounter = SpawnRuntimeTime;
@@ -81,7 +105,7 @@ public class UnitSpawner : MonoBehaviour
                 if (spawnedUnits < startUnitRatioCount)
                     continue;
 
-                if (currentWaveUnitCount >= TotalWaveUnitCount)
+                if (currentWaveSpawnedCount >= TotalWaveUnitCount)
                 {
                     return 0;
                 }
@@ -99,7 +123,9 @@ public class UnitSpawner : MonoBehaviour
         float xPos = Random.Range(mapSpawnZone.xMin, mapSpawnZone.xMax);
         float yPos = Random.Range(mapSpawnZone.yMin, mapSpawnZone.yMax);
         Instantiate(entityPrefab, new Vector3(xPos, yPos, 0.0f), Quaternion.identity);
-        currentWaveUnitCount++;
+        currentWaveSpawnedCount++;
+        CurrentOnScreenCount++;
+
     }
 
     // public void SetSpawn

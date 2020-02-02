@@ -11,10 +11,12 @@ public class Projectile : MonoBehaviour
     protected float flightTime;
     public float Damage;
     public bool Friendly = false;
+    public bool IsShotgunProjectile = false;
     public ContactFilter2D ContactFilter { get; set; }
     private List<Collider2D> Colliders = new List<Collider2D>();
     public bool Live = true;
-    public TrailRenderer MyTrailRenderer;
+    public TrailRenderer MyTrailRenderer, MyShotgunTrailRenderer;
+    public LineRenderer MyLineRenderer, MyShotgunLineRenderer;
 
     private void Awake()
     {
@@ -23,9 +25,15 @@ public class Projectile : MonoBehaviour
         projectileCollider = GetComponent<Collider2D>();
         if (MyTrailRenderer)
             MyTrailRenderer.Clear();
+        if (MyShotgunTrailRenderer)
+            MyShotgunTrailRenderer.Clear();
+        
+        
     }
 
-    public virtual void Reset(Vector2 position, Quaternion rotation, float velocity, float flightTime)
+
+    
+    public virtual void Reset(Vector2 position, Quaternion rotation, float velocity, float flightTime, bool isshotgun)
     {
         this.flightTime = flightTime;
         transform.position = position;
@@ -33,8 +41,31 @@ public class Projectile : MonoBehaviour
         rigidBody.velocity = transform.right*velocity;
         rigidBody.angularVelocity = 0.0f;
         transform.parent = null;
+        IsShotgunProjectile = isshotgun;
+        
         if (MyTrailRenderer)
             MyTrailRenderer.Clear();
+        if (MyShotgunTrailRenderer)
+            MyShotgunTrailRenderer.Clear();
+        if (IsShotgunProjectile)
+        {
+            if (MyTrailRenderer)
+                MyTrailRenderer.enabled = false;
+            if (MyLineRenderer)
+                MyLineRenderer.enabled = false;
+            if (MyShotgunTrailRenderer)
+                MyShotgunTrailRenderer.enabled = true;
+        } else
+        {
+            if (MyTrailRenderer)
+                MyTrailRenderer.enabled = true;
+            if (MyLineRenderer)
+                MyLineRenderer.enabled = true;
+            if (MyShotgunTrailRenderer)
+                MyShotgunTrailRenderer.enabled = false;
+            if (MyShotgunLineRenderer)
+                MyShotgunLineRenderer.enabled = true;
+        }
         Live = true;
     }
 
@@ -44,7 +75,15 @@ public class Projectile : MonoBehaviour
         if ((flightTime <= 0.0f) || (!Live))
         {
             Live = false;
-            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact, this.transform.position);
+            if (IsShotgunProjectile)
+            {
+                ParticleManager.EmitAt(ParticleManager.TheParticleManager.ShotgunPelletImpact, this.transform.position, -rigidBody.velocity.normalized);
+                
+            } else
+            {
+                ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact, this.transform.position);
+            }
+            
             poolLink.Return();
         }
 
