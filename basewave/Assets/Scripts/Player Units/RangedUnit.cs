@@ -14,14 +14,15 @@ public class RangedUnit : EntityRanged
         WallFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") };
         TurretFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") };
     }
-
+    public bool vfxtest = false;
     public void FixedUpdate()
     {
-        if (this.IsDead || Global.GameOver)
-        {
-            Die();
-            return;
-        }
+        if (!vfxtest) //Testing purposes
+            if (this.IsDead || Global.GameOver)
+            {
+                Die();
+                return;
+            }
 
         Colliders.Clear();
 
