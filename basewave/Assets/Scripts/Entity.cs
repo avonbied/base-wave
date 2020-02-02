@@ -9,52 +9,64 @@ using UnityEngine;
     View Attributes:
     - {SpriteOffset, Death, Heal, Attack}
 */
-public abstract class Entity : MonoBehaviour {
+public abstract class Entity : MonoBehaviour, IDamageable, IHealable
+{
 
     public Vector3 TargetPos;
     public float Speed;
 
     public Transform EnemyTarget;
     public Transform RangeCollider;
+    public float Speed;
+    [SerializeField]
     private float HitPoints;
     public float Damage;
     public float FireRate;
     public float ProjectileSpeed;
     public float BaseWeaponRange;
     private float _WeaponRange;
+    public float TimeLastFired;
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
-    public float SpriteOffset;
-    public bool AttackingBase = false;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+
+    /// <summary>
+    ///  Used for collider checking this reused so we allocate less memory.
+    /// </summary>
+    /// <typeparam name="Collider2D"></typeparam>
+    /// <returns></returns>
+    protected List<Collider2D> Colliders = new List<Collider2D>();
 
     public bool IsDead {
         get { return (this.HitPoints <= 0); }
-        //private set {}
     }
 
-    public void Hit(float HP) {
-        HitPoints -= HP;
-        //Todo Blood and Gore
+    public float SpriteOffset;
+    public bool AttackingBase = false;
+
+    public void Die()
+    {
+        //Todo Particles;
+        gameObject.SetActive(false);
     }
 
-    // Could this be a support method for a Kill Test?
-    public void Die() {
-        throw new NotImplementedException();
+    public abstract void FireOnTarget(ContactFilter2D filter);
+
+    public void Hit(float DamagePoints)
+    {
+        this.HitPoints -= DamagePoints;
     }
 
-    public void FireOnTargetRanged() {
-
+    public void Heal(float HitPoints)
+    {
+        this.HitPoints += HitPoints;
     }
 
 
     public void AttackBase()
     {
         AttackingBase = true;
+        Global.Controller.Hit(Damage * Time.fixedDeltaTime);
     }
 
     public void LookAtPosition(Vector3 pos)
@@ -64,22 +76,22 @@ public abstract class Entity : MonoBehaviour {
         transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(Vector3.right, dif) + SpriteOffset) * sign;
     }
 
-    public void FindNewTarget(string target)
-    {
+    public void FindNewTarget(string target) {
         EnemyTarget = null;
-        List<Collider2D> cols = new List<Collider2D>();
+        Colliders.Clear();
+
         var x = new ContactFilter2D();
         x.SetLayerMask(LayerMask.GetMask(target));
-        RangeCollider.GetComponent<CircleCollider2D>().OverlapCollider(x, cols);
-        if (cols.Count > 0) {
+
+        if (RangeCollider.GetComponent<CircleCollider2D>().OverlapCollider(x, Colliders) > 0) {
             var MaxDistance = WeaponRange + 1;
             Transform trans = null;
-            for (int i = 0; i < cols.Count; i += 1) {
-                var distance = Vector2.Distance(cols[i].transform.position, transform.position);
-                if (distance < MaxDistance)
-                {
+
+            foreach (var col in Colliders) {
+                var distance = Vector2.Distance(col.transform.position, transform.position);
+                if (distance < MaxDistance) {
                     MaxDistance = distance;
-                    trans = cols[i].transform;
+                    trans = col.transform;
                 }
             }
             if (trans != null) {

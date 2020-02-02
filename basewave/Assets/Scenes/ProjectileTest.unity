@@ -244,14 +244,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetPos: {x: 0, y: 0, z: 0}
   EnemyTarget: {fileID: 0}
+  RangeCollider: {fileID: 0}
   Speed: 0
   HitPoints: 0
   Damage: 0
   FireRate: 0.1
-  ProjectileSpeed: 10
-  WeaponRange: 0
+  ProjectileSpeed: 5
+  BaseWeaponRange: 2
   Class: 0
-  Dead: 0
+  SpriteOffset: 0
+  AttackingBase: 0
 --- !u!1 &419979070
 GameObject:
   m_ObjectHideFlags: 0

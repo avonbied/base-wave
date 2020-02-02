@@ -1,19 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 // TODO - implement menu
-public class MenuManager : MonoBehaviour
-{
+public class MenuManager : MonoBehaviour {
     // Start is called before the first frame update
-    void Start()
-    {
 
+    public void StartMenu() {
+        SceneManager.LoadScene("StartScene");
+    }
+    public void LoadGame() {
+        SceneManager.LoadScene("GameScene");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+    public void LoadCredits() {
+        SceneManager.LoadScene("CreditsScene");
+    }
+    public void QuitGame() {
+        Application.Quit();
     }
 }

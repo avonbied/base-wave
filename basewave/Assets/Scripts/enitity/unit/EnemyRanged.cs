@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRanged : Entity
+public class EnemyRanged : EntityRanged
 {
+    ContactFilter2D TargetFilter;
+    ContactFilter2D TurretFilter;
+    ContactFilter2D WallFilter;
 
-    // Use this for initialization
-
-    void Start()
+    private void Awake()
     {
-
+        TargetFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") };
+        TurretFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") };
+        WallFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") };
     }
 
     public void FixedUpdate()
     {
-        // Kill Test
-        if (this.IsDead)
+        if (this.IsDead || Global.GameOver)
         {
             Die();
             return;
@@ -31,14 +33,17 @@ public class EnemyRanged : Entity
 
         if (EnemyTarget != null)
         {
-            FireOnTargetRanged();
+            FireOnTarget(TargetFilter);
             LookAtPosition(EnemyTarget.position);
         }
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
+
             LookAtPosition(TargetPos);
-            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") }, new List<Collider2D>()) > 0 || transform.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") }, new List<Collider2D>()) > 0)
+
+            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0 ||
+                transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
             {
                 AttackBase();
             }

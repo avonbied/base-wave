@@ -207,12 +207,11 @@ MonoBehaviour:
   EnemyTarget: {fileID: 0}
   RangeCollider: {fileID: 4158616670849869363}
   Speed: 3
-  HitPoints: 100
+  HitPoints: 50
   Damage: 50
   FireRate: 15
   ProjectileSpeed: 0
   BaseWeaponRange: 1
   Class: 0
-  Dead: 0
   SpriteOffset: 0
   AttackingBase: 0

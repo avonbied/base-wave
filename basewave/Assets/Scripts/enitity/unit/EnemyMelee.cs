@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMelee : Entity {
+public class EnemyMelee : Entity
+{
+    ContactFilter2D TargetFilter;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    private void Start()
+    {
+        TargetFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") };
+    }
 
-	private void FixedUpdate()
-	{
-        // Kill Test
-        if (this.IsDead) {
+    private void FixedUpdate()
+    {
+        if (this.IsDead || Global.GameOver)
+        {
             Die();
             return;
         }
@@ -30,7 +32,7 @@ public class EnemyMelee : Entity {
         {
             if (Vector3.Distance(transform.position, EnemyTarget.position) < WeaponRange * .4f)
             {
-                FireOnTargetRanged();
+                FireOnTarget(TargetFilter);
                 LookAtPosition(EnemyTarget.position);
             }
             else
@@ -52,5 +54,11 @@ public class EnemyMelee : Entity {
                 AttackBase();
             }
         }
+    }
+
+
+    public override void FireOnTarget(ContactFilter2D filter)
+    {
+        throw new System.NotImplementedException();
     }
 }
