@@ -69,6 +69,9 @@ public class UnitSpawner : MonoBehaviour
             if (SpawnRuntimeTime > FinalMiniumSpawnRateTime)
             {
                 SpawnRuntimeTime *= 0.95f;
+            }
+            else
+            {
                 SpawnRuntimeTime = FinalMiniumSpawnRateTime;
             }
         }
