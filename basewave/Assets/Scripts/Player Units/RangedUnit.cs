@@ -30,18 +30,18 @@ public class RangedUnit : EntityRanged
         {
             LookAtPosition(TargetPos);
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
-            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
-            {
-                WeaponRange = BaseWeaponRange * 3;
-            }
-            else if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0)
-            {
-                WeaponRange = BaseWeaponRange * 1.5f;
-            }
-            else
-            {
-                WeaponRange = BaseWeaponRange;
-            }
+            // if (transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
+            // {
+            //     WeaponRange = BaseWeaponRange * 3;
+            // }
+            // else if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0)
+            // {
+            //     WeaponRange = BaseWeaponRange * 1.5f;
+            // }
+            // else
+            // {
+            // }
+            WeaponRange = BaseWeaponRange;
         }
         else
         {

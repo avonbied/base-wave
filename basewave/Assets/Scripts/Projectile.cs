@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
         rigidBody.velocity = velocity;
         rigidBody.angularVelocity = 0.0f;
         transform.parent = null;
-        
+
     }
 
     protected virtual void FixedUpdate()
@@ -36,16 +36,16 @@ public class Projectile : MonoBehaviour
         flightTime -= Time.fixedDeltaTime;
         if (flightTime <= 0.0f)
         {
-            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact,this.transform.position);
+            // ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact,this.transform.position);
             poolLink.Return();
         }
 
-        projectileCollider.OverlapCollider(ContactFilter, Colliders);
-        if (Colliders.Count > 0)
-        {
-            Colliders[0].GetComponent<Entity>().Hit(Damage);
-            poolLink.Return();
-        }
+        // projectileCollider.OverlapCollider(ContactFilter, Colliders);
+        // if (Colliders.Count > 0)
+        // {
+        //     Colliders[0].GetComponent<Entity>().Hit(Damage);
+        //     poolLink.Return();
+        // }
 
     }
 }
