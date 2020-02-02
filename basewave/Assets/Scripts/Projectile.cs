@@ -55,6 +55,8 @@ public class Projectile : MonoBehaviour
                 MyLineRenderer.enabled = false;
             if (MyShotgunTrailRenderer)
                 MyShotgunTrailRenderer.enabled = true;
+            if (MyShotgunLineRenderer)
+                MyShotgunLineRenderer.enabled = true;
         } else
         {
             if (MyTrailRenderer)
@@ -64,7 +66,7 @@ public class Projectile : MonoBehaviour
             if (MyShotgunTrailRenderer)
                 MyShotgunTrailRenderer.enabled = false;
             if (MyShotgunLineRenderer)
-                MyShotgunLineRenderer.enabled = true;
+                MyShotgunLineRenderer.enabled = false;
         }
         Live = true;
     }
