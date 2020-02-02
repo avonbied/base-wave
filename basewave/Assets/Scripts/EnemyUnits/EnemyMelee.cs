@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class EnemyMelee : Entity
 {
+    ContactFilter2D TargetFilter;
+
+    private void Start()
+    {
+        TargetFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") };
+    }
 
     private void FixedUpdate()
     {
@@ -26,7 +32,7 @@ public class EnemyMelee : Entity
         {
             if (Vector3.Distance(transform.position, EnemyTarget.position) < WeaponRange * .4f)
             {
-                FireOnTarget();
+                FireOnTarget(TargetFilter);
                 LookAtPosition(EnemyTarget.position);
             }
             else
@@ -51,7 +57,7 @@ public class EnemyMelee : Entity
     }
 
 
-    public override void FireOnTarget()
+    public override void FireOnTarget(ContactFilter2D filter)
     {
         throw new System.NotImplementedException();
     }

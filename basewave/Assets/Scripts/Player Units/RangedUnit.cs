@@ -2,26 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedUnit : Entity
+public class RangedUnit : EntityRanged
 {
-    ContactFilter2D Filter;
+    ContactFilter2D EnemyFilter;
+    ContactFilter2D WallFilter;
+    ContactFilter2D TurretFilter;
+
     private void Awake()
     {
-        Filter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
-    }
-
-    public override void FireOnTarget()
-    {
-        if (TimeLastFired + (1.0f / FireRate) <= Time.realtimeSinceStartup)
-        {
-            TimeLastFired = Time.realtimeSinceStartup;
-            var obj = Global.ProjectilePool.Rent();
-            obj.SetActive(true);
-            var proj = obj.GetComponent<Projectile>();
-            proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
-            proj.ContactFilter = Filter;
-            proj.Damage = Damage;
-        }
+        EnemyFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
+        WallFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") };
+        TurretFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") };
     }
 
     public void FixedUpdate()
@@ -32,15 +23,17 @@ public class RangedUnit : Entity
             return;
         }
 
+        Colliders.Clear();
+
         if (Vector3.Distance(transform.position, TargetPos) >= 0.1)
         {
             LookAtPosition(TargetPos);
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
-            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") }, new List<Collider2D>()) > 0)
+            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
             {
                 WeaponRange = BaseWeaponRange * 3;
             }
-            else if (transform.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") }, new List<Collider2D>()) > 0)
+            else if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0)
             {
                 WeaponRange = BaseWeaponRange * 1.5f;
             }
@@ -57,7 +50,7 @@ public class RangedUnit : Entity
             }
             if (EnemyTarget != null)
             {
-                FireOnTarget();
+                FireOnTarget(EnemyFilter);
                 LookAtPosition(EnemyTarget.position);
             }
         }

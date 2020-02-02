@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRanged : Entity
+public class EnemyRanged : EntityRanged
 {
-    ContactFilter2D Filter;
+    ContactFilter2D TargetFilter;
+    ContactFilter2D TurretFilter;
+    ContactFilter2D WallFilter;
+
     private void Awake()
     {
-        Filter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
+        TargetFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") };
+        TurretFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") };
+        WallFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") };
     }
+
     public void FixedUpdate()
     {
         if (this.IsDead || Global.GameOver)
@@ -27,31 +33,20 @@ public class EnemyRanged : Entity
 
         if (EnemyTarget != null)
         {
-            FireOnTarget();
+            FireOnTarget(TargetFilter);
             LookAtPosition(EnemyTarget.position);
         }
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
+
             LookAtPosition(TargetPos);
-            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") }, new List<Collider2D>()) > 0 || transform.GetComponent<CircleCollider2D>().OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") }, new List<Collider2D>()) > 0)
+
+            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0 ||
+                transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
             {
                 AttackBase();
             }
-        }
-    }
-
-
-    public override void FireOnTarget()
-    {
-        if (TimeLastFired + (1.0f / FireRate) <= Time.realtimeSinceStartup)
-        {
-            TimeLastFired = Time.realtimeSinceStartup;
-            var obj = Global.ProjectilePool.Rent();
-            obj.SetActive(true);
-            var proj = obj.GetComponent<Projectile>();
-            proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
-            proj.ContactFilter = Filter;
         }
     }
 }
