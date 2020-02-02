@@ -9,16 +9,13 @@ using UnityEngine;
     View Attributes:
     - {SpriteOffset, Death, Heal, Attack}
 */
-public abstract class Entity : MonoBehaviour, IDamageable, IHealable
-{
-
+public abstract class Entity : MonoBehaviour, IDamageable, IHealable {
     public Vector3 TargetPos;
     public float Speed;
 
     public Transform EnemyTarget;
     public Transform RangeCollider;
     public float Speed;
-    [SerializeField]
     private float HitPoints;
     public float Damage;
     public float FireRate;

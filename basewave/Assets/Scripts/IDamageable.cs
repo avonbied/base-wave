@@ -1,4 +1,3 @@
-﻿public interface IDamageable
-{
+﻿public interface IDamageable {
     void Hit(float DamagePoints);
 }
