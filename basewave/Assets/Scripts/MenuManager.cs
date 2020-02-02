@@ -20,9 +20,4 @@ public class MenuManager : MonoBehaviour {
     public void QuitGame() {
         Application.Quit();
     }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
 }

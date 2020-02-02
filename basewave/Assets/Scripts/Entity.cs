@@ -53,7 +53,6 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public void Hit(float DamagePoints)
     {
         this.HitPoints -= DamagePoints;
-        //Todo Blood and Gore
     }
 
     public void Heal(float HitPoints)
