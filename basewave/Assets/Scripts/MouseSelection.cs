@@ -15,16 +15,20 @@ public class MouseSelection : MonoBehaviour
 
     private Vector3 originalScale;
 
-    private List<Collider2D> Colliders = new List<Collider2D>();
+    private List<Collider2D> FirstPassColliders = new List<Collider2D>();
+    private List<Collider2D> SelectedColliders = new List<Collider2D>();
 
     private Vector2 MoveMouseStart;
     private Vector2 MoveMouseEnd;
     private int SelectionNumber = 0;
 
+    ContactFilter2D FriendlyFilter;
+
     // Start is called before the first frame update
     void Start()
     {
         dragBoxCollider = GetComponentInChildren<BoxCollider2D>();
+        FriendlyFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") };
     }
 
     private void OnGUI()
@@ -69,27 +73,26 @@ public class MouseSelection : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            var colliders = new List<Collider2D>();
             //dragBoxCollider.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") }, colliders);
 
             //Marcus: "No Collider necessary."
             Vector2 minvec = new Vector2(Mathf.Min(sizingStartWorldPos.x, sizingCurrWorldPos.x), Mathf.Min(sizingStartWorldPos.y, sizingCurrWorldPos.y));
             Vector2 maxvec = new Vector2(Mathf.Max(sizingStartWorldPos.x, sizingCurrWorldPos.x), Mathf.Max(sizingStartWorldPos.y, sizingCurrWorldPos.y));
-            Physics2D.OverlapBox(minvec+((maxvec - minvec)*.5f),maxvec-minvec,0f,new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") }, colliders);
+            Physics2D.OverlapBox(minvec + ((maxvec - minvec) * .5f), maxvec - minvec, 0f, FriendlyFilter, FirstPassColliders);
 
             if (!Input.GetKey(KeyCode.LeftShift))
             {
-                foreach (var col in Colliders)
+                foreach (var col in SelectedColliders)
                 {
                     col.GetComponent<SpriteRenderer>().color = Color.white;
                 }
-                Colliders.Clear();
+                SelectedColliders.Clear();
             }
-            foreach (var collider in colliders)
+            foreach (var collider in FirstPassColliders)
             {
                 collider.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.blue;
             }
-            Colliders.AddRange(colliders);
+            SelectedColliders.AddRange(FirstPassColliders);
             transform.localScale = originalScale;
 
             sizing = false;
@@ -102,21 +105,21 @@ public class MouseSelection : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             MoveMouseEnd = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Colliders.Count > 0)
-            if (Vector2.Distance(MoveMouseEnd,MoveMouseStart)<.3)
-            {
-                if (SelectionNumber >= Colliders.Count) { SelectionNumber = 0; }
-                Colliders[SelectionNumber++].GetComponent<Entity>().TargetPos = MoveMouseStart;
-            }
-            else
-            {
-                var x = 1.0f / Colliders.Count;
-                for (int i = 0; i<Colliders.Count; i++)
+            if (SelectedColliders.Count > 0)
+                if (Vector2.Distance(MoveMouseEnd, MoveMouseStart) < .3)
                 {
-                    Colliders[i].GetComponent<Entity>().TargetPos = Vector2.Lerp(MoveMouseStart, MoveMouseEnd, x*i);
-                    Colliders[i].GetComponent<Entity>().TargetPosDesignated = true;
+                    if (SelectionNumber >= SelectedColliders.Count) { SelectionNumber = 0; }
+                    SelectedColliders[SelectionNumber++].GetComponent<Entity>().TargetPos = MoveMouseStart;
                 }
-            }
+                else
+                {
+                    var x = 1.0f / SelectedColliders.Count;
+                    for (int i = 0; i < SelectedColliders.Count; i++)
+                    {
+                        SelectedColliders[i].GetComponent<Entity>().TargetPos = Vector2.Lerp(MoveMouseStart, MoveMouseEnd, x * i);
+                        SelectedColliders[i].GetComponent<Entity>().TargetPosDesignated = true;
+                    }
+                }
         }
 
     }
