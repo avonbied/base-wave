@@ -12,7 +12,7 @@ public class EntityRanged : Entity
     protected LineRenderer MyBeamLineRenderer = null;
     protected ParticleSystem MyBeamEmitter = null;
     protected bool beamused = false;
-    public override void FireOnTarget(ContactFilter2D filter)
+    public override void FireOnTarget(ContactFilter2D filter, bool Friendly)
     {
         switch (Class)
         {
@@ -28,20 +28,15 @@ public class EntityRanged : Entity
                         obj.SetActive(true);
                         var proj = obj.GetComponent<Projectile>();
                         ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaShoot, this.transform.position, transform.right);
-                        proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
+                        proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, WeaponRange*4*Time.fixedDeltaTime*Speed);
                         proj.ContactFilter = filter;
                         proj.Damage = Damage;
-                        proj.Friendly = this.Friendly;
+                        proj.Friendly = Friendly;
                     }
 
 
                     break;
                 };
-            case ClassType.Melee:
-                {
-
-                    break;
-                }
             
             case ClassType.RangedBeam:
                 {
@@ -83,8 +78,6 @@ public class EntityRanged : Entity
                             hitentity = col.GetComponent<Entity>();
                             if ((hitentity != null))
                             {
-                                if (this.Friendly != hitentity.Friendly)
-                                {
 
                                     if ((!hasbest) || (rh.distance < bestmag)) //Choose the closest target to hit on the Raycast
                                     {
@@ -92,13 +85,8 @@ public class EntityRanged : Entity
                                         hasbest = true;
                                         bestmag = rh.distance;
                                     besthitentity = hitentity;
-                                }
 
 
-                                }
-                                else
-                                {
-                                    //Hit ally
                                 }
                             } else
                         {
@@ -146,8 +134,6 @@ public class EntityRanged : Entity
                             hitentity = col.GetComponent<Entity>();
                             if ((hitentity != null))
                             {
-                                if (this.Friendly != hitentity.Friendly)
-                                {
                                     Vector2 dif = new Vector2(col.transform.position.x, col.transform.position.y) - new Vector2(this.transform.position.x, this.transform.position.y);
                                     float mag = dif.magnitude;
                                     float mr = 1f - (mag / WeaponRange);
@@ -158,10 +144,6 @@ public class EntityRanged : Entity
                                     }
                                     
                                     
-                                }
-                                else
-                                {
-                                    //Hit ally
                                 }
                             }
                             
@@ -182,12 +164,6 @@ public class EntityRanged : Entity
                     }
                     break;
                 }
-            case ClassType.SuicideBomber:
-                {
-
-                    break;
-                }
         }
         
     }
-}

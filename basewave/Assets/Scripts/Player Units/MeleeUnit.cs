@@ -8,7 +8,8 @@ public class MeleeUnit : EntityMelee
 
     private void Start()
     {
-        TargetFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") };
+        TargetFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
+        Friendly = true;
     }
 
     private void FixedUpdate()
@@ -36,7 +37,7 @@ public class MeleeUnit : EntityMelee
         {
             if (Vector3.Distance(transform.position, EnemyTarget.position) < WeaponRange * .4f)
             {
-                FireOnTarget(TargetFilter);
+                FireOnTarget(TargetFilter,true);
                 LookAtPosition(EnemyTarget.position);
             }
             else

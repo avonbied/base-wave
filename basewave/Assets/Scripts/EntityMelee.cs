@@ -2,7 +2,7 @@
 
 public class EntityMelee : Entity
 {
-    public override void FireOnTarget(ContactFilter2D filter)
+    public override void FireOnTarget(ContactFilter2D filter, bool Friendly)
     {
         if (TimeLastFired + (1.0f / FireRate) <= Time.realtimeSinceStartup)
         {

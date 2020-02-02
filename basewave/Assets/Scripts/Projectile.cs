@@ -41,21 +41,18 @@ public class Projectile : MonoBehaviour
         if ((flightTime <= 0.0f) || (!Live))
         {
             Live = false;
-            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact,this.transform.position);
+            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact, this.transform.position);
             poolLink.Return();
         }
 
-        
-        if (false)//Marcus: "There seems to be some performance overhead correlating to projectiles"
-        {
-            projectileCollider.OverlapCollider(ContactFilter, Colliders);
-            if (Colliders.Count > 0)
-            {
-                Colliders[0].GetComponent<Entity>().Hit(Damage);
-                poolLink.Return();
-            }
-        }
-        
+
+        //projectileCollider.OverlapCollider(ContactFilter, Colliders);
+        //if (Colliders.Count > 0)
+        //{
+        //    Colliders[0].GetComponent<Entity>().Hit(Damage);
+        //    poolLink.Return();
+        //}
+
 
     }
     Entity hitentity;

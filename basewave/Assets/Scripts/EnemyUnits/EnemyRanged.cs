@@ -13,6 +13,7 @@ public class EnemyRanged : EntityRanged
         TargetFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") };
         TurretFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") };
         WallFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") };
+        Friendly = false;
     }
 
     public void FixedUpdate()
@@ -39,7 +40,7 @@ public class EnemyRanged : EntityRanged
 
         if (EnemyTarget != null)
         {
-            FireOnTarget(TargetFilter);
+            FireOnTarget(TargetFilter, false);
             LookAtPosition(EnemyTarget.position);
         }
         else

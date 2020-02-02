@@ -13,6 +13,7 @@ public class RangedUnit : EntityRanged
         EnemyFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
         WallFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") };
         TurretFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") };
+        Friendly = true;
     }
 
     
@@ -31,13 +32,13 @@ public class RangedUnit : EntityRanged
         {
             LookAtPosition(TargetPos);
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
-            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
-            {
-                WeaponRange = BaseWeaponRange * 1.5f;
-            }
-            else if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0)
+            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0)
             {
                 WeaponRange = BaseWeaponRange * 3f;
+            }
+            else if (transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
+            {
+                WeaponRange = BaseWeaponRange * 1.5f;
             }
             else
             {
@@ -53,7 +54,7 @@ public class RangedUnit : EntityRanged
             if (EnemyTarget != null)
             {
                 LookAtPosition(EnemyTarget.position);
-                FireOnTarget(EnemyFilter);
+                FireOnTarget(EnemyFilter, true);
             }
         }
 
