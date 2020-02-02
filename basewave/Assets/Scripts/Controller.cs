@@ -23,6 +23,8 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
 
     public PoolManager pool;
 
+    Camera cam;
+
 
     // Use this for initialization
     private void Awake()
@@ -32,6 +34,7 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     void Start()
     {
         Global.Controller = this;
+        cam = Camera.main;
     }
 
     private void FixedUpdate()
@@ -43,6 +46,31 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
         }
         if (BaseHP <= 0)
             Global.GameOver = true;
+    }
+
+
+
+    Vector2 LastMousePos;
+    private void Update()
+    {
+        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - Input.mouseScrollDelta.y, 5, 15);
+
+        if (Input.GetMouseButtonDown(2))
+            LastMousePos = Input.mousePosition;
+        if (Input.GetMouseButton(2))
+        {
+            Debug.Log("hnmm");
+            if (LastMousePos != (Vector2)Input.mousePosition)
+            {
+                Debug.Log("y u do dis :(");
+                Vector2 oldpos = cam.ScreenToWorldPoint(LastMousePos);
+                Vector2 newpos = cam.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 pos = (Vector2)cam.transform.position - (newpos - oldpos);
+                pos.z = -10;
+                cam.transform.position = pos;
+            }
+            LastMousePos = Input.mousePosition;
+        }
     }
 
     public void Hit(float DamagePoints)

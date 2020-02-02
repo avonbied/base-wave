@@ -173,7 +173,7 @@ MonoBehaviour:
   RangeCollider: {fileID: 6492765178967648749}
   Speed: 1
   HitPoints: 50
-  Damage: 0
+  Damage: 2
   FireRate: 0.25
   ProjectileSpeed: 10
   BaseWeaponRange: 2
