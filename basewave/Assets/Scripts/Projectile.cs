@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
     private List<Collider2D> Colliders = new List<Collider2D>();
     public bool Live = true;
     public TrailRenderer MyTrailRenderer, MyShotgunTrailRenderer;
+    public LineRenderer MyLineRenderer, MyShotgunLineRenderer;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class Projectile : MonoBehaviour
             MyTrailRenderer.Clear();
         if (MyShotgunTrailRenderer)
             MyShotgunTrailRenderer.Clear();
+        
         
     }
 
@@ -49,14 +51,20 @@ public class Projectile : MonoBehaviour
         {
             if (MyTrailRenderer)
                 MyTrailRenderer.enabled = false;
+            if (MyLineRenderer)
+                MyLineRenderer.enabled = false;
             if (MyShotgunTrailRenderer)
                 MyShotgunTrailRenderer.enabled = true;
         } else
         {
             if (MyTrailRenderer)
                 MyTrailRenderer.enabled = true;
+            if (MyLineRenderer)
+                MyLineRenderer.enabled = true;
             if (MyShotgunTrailRenderer)
                 MyShotgunTrailRenderer.enabled = false;
+            if (MyShotgunLineRenderer)
+                MyShotgunLineRenderer.enabled = true;
         }
         Live = true;
     }
