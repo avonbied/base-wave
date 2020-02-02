@@ -42,8 +42,8 @@ public class RangedUnit : EntityRanged
             }
             else
             {
-                WeaponRange = BaseWeaponRange;
             }
+            WeaponRange = BaseWeaponRange;
         }
         else
         {
@@ -53,8 +53,8 @@ public class RangedUnit : EntityRanged
             }
             if (EnemyTarget != null)
             {
-                FireOnTarget(EnemyFilter);
                 LookAtPosition(EnemyTarget.position);
+                FireOnTarget(EnemyFilter);
             }
         }
 

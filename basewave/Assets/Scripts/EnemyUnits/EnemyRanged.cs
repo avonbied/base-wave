@@ -27,6 +27,12 @@ public class EnemyRanged : EntityRanged
             AttackBase();
             return;
         }
+        if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0 ||
+    transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
+        {
+            AttackBase();
+            return;
+        }
 
         if (EnemyTarget == null || Vector3.Distance(transform.position, EnemyTarget.position) > WeaponRange)
             FindNewTarget("Friendly");
@@ -41,12 +47,6 @@ public class EnemyRanged : EntityRanged
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
 
             LookAtPosition(TargetPos);
-
-            if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0 ||
-                transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
-            {
-                AttackBase();
-            }
         }
     }
 }

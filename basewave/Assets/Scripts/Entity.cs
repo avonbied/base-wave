@@ -19,6 +19,8 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public float BaseWeaponRange;
     private float _WeaponRange;
     public float TimeLastFired;
+
+    public float CreditWorth;
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
     public bool Friendly = false;
@@ -37,16 +39,12 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public float SpriteOffset;
     public bool AttackingBase = false;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     public void Die()
     {
         //Todo Particles;
-        gameObject.SetActive(false);
+        Global.Controller.Credits += CreditWorth;
+        Destroy(gameObject);
     }
 
     public abstract void FireOnTarget(ContactFilter2D filter);
@@ -71,7 +69,12 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     {
         var dif = pos - transform.position;
         var sign = (pos.y < transform.position.y) ? -1.0f : 1.0f;
-        transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(Vector3.right, dif) + SpriteOffset) * sign;
+        var rot = Vector3.Angle(Vector3.right, dif) + SpriteOffset;
+        if (rot < 0)
+            rot += 360;
+        else if (rot >= 360)
+            rot -= 360;
+        transform.eulerAngles = new Vector3(0, 0, rot) * sign;
     }
 
     public void FindNewTarget(string target)
