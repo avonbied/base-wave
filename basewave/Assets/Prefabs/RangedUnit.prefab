@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f46fae9126b6bb45ac3dcc0ee3a85e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetPos: {x: 4.5, y: 4.5, z: 0}
+  TargetPos: {x: 0, y: 0, z: 0}
   TargetPosDesignated: 1
   EnemyTarget: {fileID: 0}
   RangeCollider: {fileID: 7771851562553304736}
