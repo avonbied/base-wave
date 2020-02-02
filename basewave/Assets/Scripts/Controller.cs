@@ -62,7 +62,9 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     private void Awake()
     {
         Global.ProjectilePool = pool;
+        Global.UnitSpawner = GetComponent<UnitSpawner>();
     }
+
     void Start()
     {
         Global.Controller = this;

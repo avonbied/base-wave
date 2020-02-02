@@ -20,7 +20,9 @@ public class UnitSpawner : MonoBehaviour
 
     public int TotalWaveUnitCount;
 
-    private int currentWaveUnitCount = 0;
+    private int currentWaveSpawnedCount = 0;
+
+    public int CurrentOnScreenCount = 0;
 
     private void Start()
     {
@@ -81,7 +83,7 @@ public class UnitSpawner : MonoBehaviour
                 if (spawnedUnits < startUnitRatioCount)
                     continue;
 
-                if (currentWaveUnitCount >= TotalWaveUnitCount)
+                if (currentWaveSpawnedCount >= TotalWaveUnitCount)
                 {
                     return 0;
                 }
@@ -99,7 +101,9 @@ public class UnitSpawner : MonoBehaviour
         float xPos = Random.Range(mapSpawnZone.xMin, mapSpawnZone.xMax);
         float yPos = Random.Range(mapSpawnZone.yMin, mapSpawnZone.yMax);
         Instantiate(entityPrefab, new Vector3(xPos, yPos, 0.0f), Quaternion.identity);
-        currentWaveUnitCount++;
+        currentWaveSpawnedCount++;
+        CurrentOnScreenCount++;
+
     }
 
     // public void SetSpawn
