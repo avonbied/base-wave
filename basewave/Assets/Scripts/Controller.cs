@@ -30,6 +30,7 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     public int CostMelee;
     public int CostLaser;
     public int CostPlasma;
+    public int CostRepair;
 
     public GameObject PrefabShotgun;
     public GameObject PrefabLaser;
@@ -55,6 +56,16 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     {
         if (AttemptToBuy(CostPlasma))
             Instantiate(PrefabPlasma, Vector3.zero, new Quaternion());
+    }
+
+    int TimesUsed = 0;
+    public void BuyRepairBase()
+    {
+        if (AttemptToBuy(CostRepair * (TimesUsed+1)))
+        {
+            TimesUsed++;
+            Global.Controller.BaseHP = Global.Controller.MaxHP;
+        }
     }
 
 
