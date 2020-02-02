@@ -12,12 +12,15 @@ public class EntityRanged : Entity
             TimeLastFired = Time.realtimeSinceStartup;
             // Borrows a projectile from the Object Pool
             var obj = Global.ProjectilePool.Rent();
+            if (obj == null)
+                return;
             obj.SetActive(true);
             var proj = obj.GetComponent<Projectile>();
             ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaShoot, this.transform.position, transform.right);
             proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
             proj.ContactFilter = filter;
             proj.Damage = Damage;
+            proj.gameObject.layer = LayerMask.NameToLayer("EnemyProjectiles");
             proj.Friendly = this.Friendly;
         }
     }

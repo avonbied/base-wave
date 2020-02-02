@@ -41,11 +41,11 @@ public class Projectile : MonoBehaviour
         if ((flightTime <= 0.0f) || (!Live))
         {
             Live = false;
-            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact,this.transform.position);
+            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact, this.transform.position);
             poolLink.Return();
         }
 
-        
+
         if (false)//There seems to be some performance overhead correlating to projectiles
         {
             projectileCollider.OverlapCollider(ContactFilter, Colliders);
@@ -55,7 +55,7 @@ public class Projectile : MonoBehaviour
                 poolLink.Return();
             }
         }
-        
+
 
     }
     Entity hitentity;
@@ -65,18 +65,21 @@ public class Projectile : MonoBehaviour
         if (collision != null)//(Colliders.Count > 0)
         {
             hitentity = collision.GetComponent<Entity>();
-            if ((hitentity != null)) {
+            if ((hitentity != null))
+            {
                 if (this.Friendly != hitentity.Friendly)
                 {
                     ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact, this.transform.position);
                     hitentity.Hit(Damage);
                     Live = false;
                     poolLink.Return();
-                } else
+                }
+                else
                 {
                     //Hit ally
                 }
-            } else
+            }
+            else
             {
                 //Live = false;
                 //poolLink.Return();
