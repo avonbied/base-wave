@@ -54,9 +54,9 @@ public class Projectile : MonoBehaviour
             if (MyLineRenderer)
                 MyLineRenderer.enabled = false;
             if (MyShotgunTrailRenderer)
-                MyShotgunTrailRenderer.enabled = true;
+                MyShotgunTrailRenderer.enabled = false;
             if (MyShotgunLineRenderer)
-                MyShotgunLineRenderer.enabled = true;
+                MyShotgunLineRenderer.enabled = false;
         } else
         {
             if (MyTrailRenderer)
@@ -93,6 +93,7 @@ public class Projectile : MonoBehaviour
         if (Colliders.Count > 0)
         {
             Colliders[0].GetComponent<Entity>().Hit(Damage);
+            if (!IsShotgunProjectile)
             ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact, this.transform.position);
             poolLink.Return();
         }
