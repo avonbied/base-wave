@@ -153,9 +153,11 @@ MonoBehaviour:
   FireRate: 15
   ProjectileSpeed: 150
   BaseWeaponRange: 2
+  TimeLastFired: 0
   Class: 1
   SpriteOffset: 0
   AttackingBase: 0
+  vfxtest: 0
 --- !u!58 &5626754765988773412
 CircleCollider2D:
   m_ObjectHideFlags: 0
