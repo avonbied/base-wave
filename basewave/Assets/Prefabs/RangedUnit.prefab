@@ -150,8 +150,8 @@ MonoBehaviour:
   Speed: 5
   HitPoints: 50
   Damage: 35
-  FireRate: 15
-  ProjectileSpeed: 150
+  FireRate: 0.25
+  ProjectileSpeed: 10
   BaseWeaponRange: 2
   TimeLastFired: 0
   Class: 1
