@@ -41,41 +41,42 @@ public class Projectile : MonoBehaviour
         if ((flightTime <= 0.0f) || (!Live))
         {
             Live = false;
-            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact, this.transform.position);
+            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact,this.transform.position);
             poolLink.Return();
         }
 
-        projectileCollider.OverlapCollider(ContactFilter, Colliders);
-        if (Colliders.Count > 0)
+        
+        if (false)//Marcus: "There seems to be some performance overhead correlating to projectiles"
         {
-            Colliders[0].GetComponent<Entity>().Hit(Damage);
-            poolLink.Return();
+            projectileCollider.OverlapCollider(ContactFilter, Colliders);
+            if (Colliders.Count > 0)
+            {
+                Colliders[0].GetComponent<Entity>().Hit(Damage);
+                poolLink.Return();
+            }
         }
-
+        
 
     }
     Entity hitentity;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //Marcus: "Projectiles had triggers in the first place. Might as well use them."
     {
         if (!Live) return;
         if (collision != null)//(Colliders.Count > 0)
         {
             hitentity = collision.GetComponent<Entity>();
-            if ((hitentity != null))
-            {
+            if ((hitentity != null)) {
                 if (this.Friendly != hitentity.Friendly)
                 {
                     ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaImpact, this.transform.position);
                     hitentity.Hit(Damage);
                     Live = false;
                     poolLink.Return();
-                }
-                else
+                } else
                 {
                     //Hit ally
                 }
-            }
-            else
+            } else
             {
                 //Live = false;
                 //poolLink.Return();

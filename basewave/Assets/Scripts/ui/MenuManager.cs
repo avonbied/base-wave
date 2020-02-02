@@ -17,6 +17,10 @@ public class MenuManager : MonoBehaviour {
     public void LoadCredits() {
         SceneManager.LoadScene("CreditsScene");
     }
+
+    public void LoadOverlay(string overlayName) {
+        
+    }
     public void QuitGame() {
         Application.Quit();
     }
