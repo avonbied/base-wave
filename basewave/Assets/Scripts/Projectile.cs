@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
         }
 
         
-        if (false)//There seems to be some performance overhead correlating to projectiles
+        if (false)//Marcus: "There seems to be some performance overhead correlating to projectiles"
         {
             projectileCollider.OverlapCollider(ContactFilter, Colliders);
             if (Colliders.Count > 0)
@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
 
     }
     Entity hitentity;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //Marcus: "Projectiles had triggers in the first place. Might as well use them."
     {
         if (!Live) return;
         if (collision != null)//(Colliders.Count > 0)

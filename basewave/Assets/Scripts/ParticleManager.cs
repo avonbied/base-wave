@@ -8,7 +8,10 @@ public class ParticleManager : MonoBehaviour
     //Put all of the Particle Effects in the Particle Manager (with some possible exceptions)
     public static ParticleManager TheParticleManager;
     public ParticleSystem WallHit,WallDestructionEffect,ShotgunBlast,ShotgunPelletImpact,BomberExplosion, PlasmaShoot,PlasmaImpact, MeleeHitEffect,RepairEffect;
-    
+    public ParticleSystem BeamSparks;
+    public ParticleSystem BeamEmitterPrefab;
+    public LineRenderer BeamLineRendererPrefab;
+
     void Start()
     {
         TheParticleManager = this;

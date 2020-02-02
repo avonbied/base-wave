@@ -22,7 +22,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
     public bool Friendly = false;
-
+    
     /// <summary>
     ///  Used for collider checking this reused so we allocate less memory.
     /// </summary>

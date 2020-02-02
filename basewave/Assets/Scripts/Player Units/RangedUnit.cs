@@ -14,6 +14,7 @@ public class RangedUnit : EntityRanged
         WallFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") };
         TurretFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") };
     }
+
     
     public bool vfxtest = false;
     public void FixedUpdate()
@@ -57,6 +58,17 @@ public class RangedUnit : EntityRanged
             }
         }
 
+        if (MyBeamLineRenderer != null)
+        {
+            if (beamused)
+            {
+                beamused = false;
+            } else
+            {
+                MyBeamLineRenderer.enabled = false;
+                MyBeamEmitter.Stop(true);
+            }
+        }
         //if (EnemyTarget != null)
         //{
         //    if (Vector3.Distance(transform.position, EnemyTarget.position) <= WeaponRange)

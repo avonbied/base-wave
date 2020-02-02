@@ -2,12 +2,13 @@
 {
     Melee,
     // Laser Beam
-    Ranged,
+    RangedBeam,
     // Shotgun & Plasma
     RangedProjectile,
     RangedMortar,
     // Enemy Specific
-    SuicideBomber
+    SuicideBomber,
+    Shotgun
 }
 public static class Global
 {

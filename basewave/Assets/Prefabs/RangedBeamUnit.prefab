@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 5626754765988773412}
   - component: {fileID: 743639564}
   m_Layer: 8
-  m_Name: RangedUnit
+  m_Name: RangedBeamUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetPos: {x: 4.5, y: 4.5, z: 0}
-  TargetPosDesignated: 1
+  TargetPosDesignated: 0
   EnemyTarget: {fileID: 0}
   RangeCollider: {fileID: 7771851562553304736}
   Speed: 5
@@ -153,9 +153,9 @@ MonoBehaviour:
   Damage: 35
   FireRate: 0.75
   ProjectileSpeed: 5
-  BaseWeaponRange: 4
+  BaseWeaponRange: 8
   TimeLastFired: 0
-  Class: 2
+  Class: 1
   Friendly: 1
   SpriteOffset: 0
   AttackingBase: 0
