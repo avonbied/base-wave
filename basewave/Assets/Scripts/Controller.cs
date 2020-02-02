@@ -24,6 +24,8 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
 
     Camera cam;
 
+    [Header("Shop")]
+
     public int CostShotgun;
     public int CostMelee;
     public int CostLaser;
@@ -60,7 +62,9 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     private void Awake()
     {
         Global.ProjectilePool = pool;
+        Global.UnitSpawner = GetComponent<UnitSpawner>();
     }
+
     void Start()
     {
         Global.Controller = this;
