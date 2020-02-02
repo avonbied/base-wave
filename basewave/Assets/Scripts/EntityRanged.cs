@@ -1,7 +1,8 @@
-
-
 using UnityEngine;
 
+/*
+    Entity Class for the Plasma Gun Unit
+*/
 public class EntityRanged : Entity
 {
     public override void FireOnTarget(ContactFilter2D filter)
@@ -9,6 +10,7 @@ public class EntityRanged : Entity
         if (TimeLastFired + (1.0f / FireRate) <= Time.realtimeSinceStartup)
         {
             TimeLastFired = Time.realtimeSinceStartup;
+            // Borrows a projectile from the Object Pool
             var obj = Global.ProjectilePool.Rent();
             if (obj == null)
                 return;
@@ -19,6 +21,7 @@ public class EntityRanged : Entity
             proj.ContactFilter = filter;
             proj.Damage = Damage;
             proj.gameObject.layer = LayerMask.NameToLayer("EnemyProjectiles");
+            proj.Friendly = this.Friendly;
         }
     }
 }

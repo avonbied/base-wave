@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7172352198960705134}
   - component: {fileID: 7172352198960705135}
+  - component: {fileID: 1220215041261272968}
   m_Layer: 0
   m_Name: ParticleManager
   m_TagString: Untagged
@@ -62,6 +63,18 @@ MonoBehaviour:
   PlasmaImpact: {fileID: 7010766834847327732}
   MeleeHitEffect: {fileID: 7172352197189233385}
   RepairEffect: {fileID: 7005011483081222113}
+--- !u!114 &1220215041261272968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172352198960705132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f949d5552b922148a949393a280158f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2791861578963678382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -291,15 +304,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d5883fda18314b44b2ccf70aef8334a, type: 3}
---- !u!4 &7171675768360559356 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4425876822657262, guid: 2d5883fda18314b44b2ccf70aef8334a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7172352196942359058}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &7005058055438463592 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198061065682557050, guid: 2d5883fda18314b44b2ccf70aef8334a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7172352196942359058}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7171675768360559356 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4425876822657262, guid: 2d5883fda18314b44b2ccf70aef8334a,
     type: 3}
   m_PrefabInstance: {fileID: 7172352196942359058}
   m_PrefabAsset: {fileID: 0}
