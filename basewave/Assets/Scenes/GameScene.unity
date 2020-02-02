@@ -285,9 +285,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityPrefabs:
+  - {fileID: 4158616671347007319, guid: c86e030b990f53140a32f82d2ba23047, type: 3}
   - {fileID: 6492765179494109321, guid: 2917f0a75bb95064eb7278260847fecf, type: 3}
-  StartSpawnRatio: 0a000000
-  SpawnRuntimeRatio: 05000000
+  StartSpawnRatio: 0300000003000000
+  SpawnRuntimeRatio: 0200000005000000
   StartSpawnUnitCount: 10
   SpawnRuntimeTime: 1
   SpawnRuntimeUnitCount: 2
