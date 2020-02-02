@@ -24,6 +24,8 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
 
     Camera cam;
 
+    [Header("Shop")]
+
     public int CostShotgun;
     public int CostMelee;
     public int CostLaser;
