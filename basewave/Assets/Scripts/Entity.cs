@@ -101,7 +101,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public void AttackBase()
     {
         AttackingBase = true;
-        Global.Controller.Hit(Damage * Time.fixedDeltaTime);
+        Global.Controller.Hit(Damage * Time.fixedDeltaTime*.25f);
         ParticleManager.EmitAt(ParticleManager.TheParticleManager.WallHit,1, transform.position+transform.right*.2f,new Quaternion());
         if (Class == ClassType.SuicideBomber)
         {
