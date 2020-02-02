@@ -788,7 +788,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lex von Biedenfeld
+  m_text: 'Lex
 
     Matthew
 
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -868,10 +868,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1355609805}
-    characterCount: 47
+    characterCount: 32
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 7
+    spaceCount: 6
+    wordCount: 5
     linkCount: 0
     lineCount: 6
     pageCount: 1
