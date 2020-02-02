@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Game : MonoBehaviour {
 
-    private Controller base;
+    private Controller Base;
 
     
     public void Awake() {
