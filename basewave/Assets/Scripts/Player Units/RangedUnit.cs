@@ -18,14 +18,16 @@ public class RangedUnit : Entity
             var obj = Global.ProjectilePool.Rent();
             obj.SetActive(true);
             var proj = obj.GetComponent<Projectile>();
+            ParticleManager.EmitAt(ParticleManager.TheParticleManager.PlasmaShoot, this.transform.position, transform.right);
             proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
             proj.ContactFilter = Filter;
             proj.Damage = Damage;
         }
     }
-
+    public bool vfxtest = false;
     public void FixedUpdate()
     {
+        if (!vfxtest) //Testing purposes
         if (this.IsDead || Global.GameOver)
         {
             Die();
