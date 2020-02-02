@@ -7,7 +7,7 @@ public class ParticleManager : MonoBehaviour
 
     //Put all of the Particle Effects in the Particle Manager (with some possible exceptions)
     public static ParticleManager TheParticleManager;
-    public ParticleSystem WallHit,WallDestructionEffect,ShotgunBlast,ShotgunPelletImpact,BomberExplosion,PlasmaImpact,MeleeHitEffect,RepairEffect;
+    public ParticleSystem WallHit,WallDestructionEffect,ShotgunBlast,ShotgunPelletImpact,BomberExplosion, PlasmaShoot,PlasmaImpact, MeleeHitEffect,RepairEffect;
     
     void Start()
     {
@@ -25,6 +25,7 @@ public class ParticleManager : MonoBehaviour
     }
     public static void EmitAt(ParticleSystem particlesystem, Vector3 location, Quaternion rotation)
     {
+        if (particlesystem == null) return;
         particlesystem.transform.position = location;
         particlesystem.transform.rotation = rotation;
 

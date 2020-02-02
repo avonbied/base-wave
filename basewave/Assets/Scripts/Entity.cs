@@ -21,6 +21,14 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
 
+
+    /// <summary>
+    ///  Used for collider checking this reused so we allocate less memory.
+    /// </summary>
+    /// <typeparam name="Collider2D"></typeparam>
+    /// <returns></returns>
+    protected List<Collider2D> Colliders = new List<Collider2D>();
+
     public bool IsDead
     {
         get { return (this.HitPoints <= 0); }
@@ -40,7 +48,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
         gameObject.SetActive(false);
     }
 
-    public abstract void FireOnTarget();
+    public abstract void FireOnTarget(ContactFilter2D filter);
 
     public void Hit(float DamagePoints)
     {
@@ -69,23 +77,26 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public void FindNewTarget(string target)
     {
         EnemyTarget = null;
-        List<Collider2D> cols = new List<Collider2D>();
+        Colliders.Clear();
+
         var x = new ContactFilter2D();
         x.SetLayerMask(LayerMask.GetMask(target));
-        RangeCollider.GetComponent<CircleCollider2D>().OverlapCollider(x, cols);
-        if (cols.Count > 0)
+
+        if (RangeCollider.GetComponent<CircleCollider2D>().OverlapCollider(x, Colliders) > 0)
         {
             var MaxDistance = WeaponRange + 1;
             Transform trans = null;
-            for (int i = 0; i < cols.Count; i++)
+
+            foreach (var col in Colliders)
             {
-                var distance = Vector2.Distance(cols[i].transform.position, transform.position);
+                var distance = Vector2.Distance(col.transform.position, transform.position);
                 if (distance < MaxDistance)
                 {
                     MaxDistance = distance;
-                    trans = cols[i].transform;
+                    trans = col.transform;
                 }
             }
+
             if (trans != null)
             {
                 EnemyTarget = trans;
