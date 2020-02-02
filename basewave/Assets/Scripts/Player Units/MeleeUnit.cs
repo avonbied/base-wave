@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMelee : EntityMelee
+public class MeleeUnit : EntityMelee
 {
     ContactFilter2D TargetFilter;
 

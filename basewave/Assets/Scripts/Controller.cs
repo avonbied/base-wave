@@ -59,10 +59,8 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
             LastMousePos = Input.mousePosition;
         if (Input.GetMouseButton(2))
         {
-            Debug.Log("hnmm");
             if (LastMousePos != (Vector2)Input.mousePosition)
             {
-                Debug.Log("y u do dis :(");
                 Vector2 oldpos = cam.ScreenToWorldPoint(LastMousePos);
                 Vector2 newpos = cam.ScreenToWorldPoint(Input.mousePosition);
                 Vector3 pos = (Vector2)cam.transform.position - (newpos - oldpos);

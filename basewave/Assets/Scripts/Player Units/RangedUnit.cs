@@ -18,12 +18,11 @@ public class RangedUnit : EntityRanged
     public bool vfxtest = false;
     public void FixedUpdate()
     {
-        if (!vfxtest) //Testing purposes
-            if (this.IsDead || Global.GameOver)
-            {
-                Die();
-                return;
-            }
+        if (this.IsDead || Global.GameOver)
+        {
+            Die();
+            return;
+        }
 
         Colliders.Clear();
 
@@ -33,16 +32,16 @@ public class RangedUnit : EntityRanged
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);
             if (transform.GetComponent<CircleCollider2D>().OverlapCollider(WallFilter, Colliders) > 0)
             {
-                WeaponRange = BaseWeaponRange * 3;
+                WeaponRange = BaseWeaponRange * 1.5f;
             }
             else if (transform.GetComponent<CircleCollider2D>().OverlapCollider(TurretFilter, Colliders) > 0)
             {
-                WeaponRange = BaseWeaponRange * 1.5f;
+                WeaponRange = BaseWeaponRange * 3f;
             }
             else
             {
+                WeaponRange = BaseWeaponRange;
             }
-            WeaponRange = BaseWeaponRange;
         }
         else
         {

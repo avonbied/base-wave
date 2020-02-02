@@ -113,7 +113,7 @@ public class MouseSelection : MonoBehaviour
                 }
                 else
                 {
-                    var x = 1.0f / SelectedColliders.Count;
+                    var x = 1.0f / (SelectedColliders.Count-1);
                     for (int i = 0; i < SelectedColliders.Count; i++)
                     {
                         SelectedColliders[i].GetComponent<Entity>().TargetPos = Vector2.Lerp(MoveMouseStart, MoveMouseEnd, x * i);
