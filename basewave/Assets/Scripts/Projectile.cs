@@ -25,12 +25,12 @@ public class Projectile : MonoBehaviour
             MyTrailRenderer.Clear();
     }
 
-    public virtual void Reset(Vector2 position, Quaternion rotation, Vector2 velocity, float flightTime)
+    public virtual void Reset(Vector2 position, Quaternion rotation, float velocity, float flightTime)
     {
         this.flightTime = flightTime;
         transform.position = position;
         transform.rotation = rotation;
-        rigidBody.velocity = velocity;
+        rigidBody.velocity = transform.right*velocity;
         rigidBody.angularVelocity = 0.0f;
         transform.parent = null;
         if (MyTrailRenderer)

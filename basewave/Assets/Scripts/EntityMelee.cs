@@ -15,6 +15,8 @@ public class EntityMelee : Entity
             var proj = obj.GetComponent<Projectile>();
             ParticleManager.EmitAt(ParticleManager.TheParticleManager.MeleeHitEffect, EnemyTarget.position, -transform.right);
             gameObject.GetComponent<AudioSource>().Play();
+            if (Class == ClassType.SuicideBomber)
+                Explode();
         }
     }
 }
