@@ -69,7 +69,12 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     {
         var dif = pos - transform.position;
         var sign = (pos.y < transform.position.y) ? -1.0f : 1.0f;
-        transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(Vector3.right, dif) + SpriteOffset) * sign;
+        var rot = Vector3.Angle(Vector3.right, dif) + SpriteOffset;
+        if (rot < 0)
+            rot += 360;
+        else if (rot >= 360)
+            rot -= 360;
+        transform.eulerAngles = new Vector3(0, 0, rot) * sign;
     }
 
     public void FindNewTarget(string target)

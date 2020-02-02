@@ -235,7 +235,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9745185
 MonoBehaviour:
@@ -513,6 +513,21 @@ PrefabInstance:
         type: 3}
       propertyPath: FireRate
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
+        type: 3}
+      propertyPath: SpriteOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
+        type: 3}
+      propertyPath: Friendly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771851563374405174, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
+        type: 3}
+      propertyPath: AttackingBase
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771851563374405175, guid: 75c90fb7d6808b54da59a84f5e5fd29c,
         type: 3}
@@ -1041,7 +1056,7 @@ Transform:
   m_Children:
   - {fileID: 547204871}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1002981649
 GameObject:

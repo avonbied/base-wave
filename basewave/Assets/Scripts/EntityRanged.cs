@@ -22,6 +22,7 @@ public class EntityRanged : Entity
             proj.Damage = Damage;
             proj.gameObject.layer = LayerMask.NameToLayer("EnemyProjectiles");
             proj.Friendly = this.Friendly;
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 }
