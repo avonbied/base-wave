@@ -40,8 +40,8 @@ public class EnemyRanged : EntityRanged
 
         if (EnemyTarget != null)
         {
-            FireOnTarget(TargetFilter, false);
             LookAtPosition(EnemyTarget.position);
+            FireOnTarget(TargetFilter, false);
         }
         else
         {
