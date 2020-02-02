@@ -32,7 +32,7 @@ public class ProjectileSpawner : MonoBehaviour
             var proj = obj.GetComponent<Projectile>();
             Debug.Log(entity.WeaponRange / entity.ProjectileSpeed);
 
-            proj.Reset(transform.position, transform.rotation, transform.right * entity.ProjectileSpeed, entity.BaseWeaponRange / entity.ProjectileSpeed,false);
+            proj.Reset(transform.position, transform.rotation,  entity.ProjectileSpeed, entity.BaseWeaponRange / entity.ProjectileSpeed,false);
 
             proj.ContactFilter = Friendly?friendlyFilter:enemyFilter;
     }
