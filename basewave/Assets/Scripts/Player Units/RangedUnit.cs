@@ -7,13 +7,14 @@ public class RangedUnit : EntityRanged
     ContactFilter2D EnemyFilter;
     ContactFilter2D WallFilter;
     ContactFilter2D TurretFilter;
-
+    
     private void Awake()
     {
         EnemyFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
         WallFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Wall") };
         TurretFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Turret") };
     }
+    
     public bool vfxtest = false;
     public void FixedUpdate()
     {
@@ -26,7 +27,7 @@ public class RangedUnit : EntityRanged
 
         Colliders.Clear();
 
-        if (Vector3.Distance(transform.position, TargetPos) >= 0.1)
+        if ((Vector3.Distance(transform.position, TargetPos) >= 0.1) && (TargetPosDesignated))
         {
             LookAtPosition(TargetPos);
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Speed * Time.fixedDeltaTime);

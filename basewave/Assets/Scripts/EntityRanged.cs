@@ -18,6 +18,7 @@ public class EntityRanged : Entity
             proj.Reset(transform.position, transform.rotation, transform.right * ProjectileSpeed, BaseWeaponRange / ProjectileSpeed);
             proj.ContactFilter = filter;
             proj.Damage = Damage;
+            proj.Friendly = this.Friendly;
         }
     }
 }

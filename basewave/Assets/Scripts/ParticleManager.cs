@@ -37,6 +37,20 @@ public class ParticleManager : MonoBehaviour
 
         }
     }
+    public static void EmitAt(ParticleSystem particlesystem,int particlecount,Vector3 location, Quaternion rotation)
+    {
+        if (particlesystem == null) return;
+        particlesystem.transform.position = location;
+        particlesystem.transform.rotation = rotation;
+
+        foreach (ParticleSystem ps in particlesystem.gameObject.GetComponentsInChildren<ParticleSystem>())
+        {
+            if (ps == null) continue;
+            ParticleSystem.EmissionModule em = particlesystem.emission;
+            ps.Emit(particlecount);//ps.Emit((em.GetBurst(0).count.mode == ParticleSystemCurveMode.TwoConstants) ? Random.Range(em.GetBurst(0).minCount, em.GetBurst(0).maxCount) : ((int)em.GetBurst(0).count.constant));
+
+        }
+    }
 
     // Update is called once per frame
     void Update()

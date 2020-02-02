@@ -70,7 +70,13 @@ public class MouseSelection : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             var colliders = new List<Collider2D>();
-            dragBoxCollider.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") }, colliders);
+            //dragBoxCollider.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") }, colliders);
+
+            //Marcus: "No Collider necessary."
+            Vector2 minvec = new Vector2(Mathf.Min(sizingStartWorldPos.x, sizingCurrWorldPos.x), Mathf.Min(sizingStartWorldPos.y, sizingCurrWorldPos.y));
+            Vector2 maxvec = new Vector2(Mathf.Max(sizingStartWorldPos.x, sizingCurrWorldPos.x), Mathf.Max(sizingStartWorldPos.y, sizingCurrWorldPos.y));
+            Physics2D.OverlapBox(minvec+((maxvec - minvec)*.5f),maxvec-minvec,0f,new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") }, colliders);
+
             if (!Input.GetKey(KeyCode.LeftShift))
             {
                 foreach (var col in Colliders)
@@ -96,6 +102,7 @@ public class MouseSelection : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             MoveMouseEnd = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Colliders.Count > 0)
             if (Vector2.Distance(MoveMouseEnd,MoveMouseStart)<.3)
             {
                 if (SelectionNumber >= Colliders.Count) { SelectionNumber = 0; }
@@ -107,6 +114,7 @@ public class MouseSelection : MonoBehaviour
                 for (int i = 0; i<Colliders.Count; i++)
                 {
                     Colliders[i].GetComponent<Entity>().TargetPos = Vector2.Lerp(MoveMouseStart, MoveMouseEnd, x*i);
+                    Colliders[i].GetComponent<Entity>().TargetPosDesignated = true;
                 }
             }
         }

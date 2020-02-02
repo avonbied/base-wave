@@ -7,6 +7,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
 {
 
     public Vector3 TargetPos;
+    public bool TargetPosDesignated = true;
     public Transform EnemyTarget;
     public Transform RangeCollider;
     public float Speed;
@@ -20,7 +21,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public float TimeLastFired;
     public float WeaponRange { get { return _WeaponRange; } set { RangeCollider.GetComponent<CircleCollider2D>().radius = value; _WeaponRange = value; } }
     public ClassType Class;
-
+    public bool Friendly = false;
 
     /// <summary>
     ///  Used for collider checking this reused so we allocate less memory.

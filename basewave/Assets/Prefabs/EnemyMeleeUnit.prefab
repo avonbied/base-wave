@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetPos: {x: 0, y: 0, z: 0}
+  TargetPosDesignated: 1
   EnemyTarget: {fileID: 0}
   RangeCollider: {fileID: 4158616670849869363}
   Speed: 3
@@ -212,6 +213,8 @@ MonoBehaviour:
   FireRate: 15
   ProjectileSpeed: 0
   BaseWeaponRange: 1
+  TimeLastFired: 0
   Class: 0
+  Friendly: 0
   SpriteOffset: 0
   AttackingBase: 0
