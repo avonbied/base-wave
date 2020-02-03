@@ -10,7 +10,7 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     public int BaseLevel;
     [SerializeField]
     private float _credits;
-    public float Credits { get => _credits; set => _credits = Mathf.Clamp(_credits, 0, float.MaxValue); }
+    public float Credits { get => _credits; set => _credits = Mathf.Clamp(value, 0, float.MaxValue); }
     public int Wave;
     [Header("Modifiers")]
     public float RangedDmgModifier;
