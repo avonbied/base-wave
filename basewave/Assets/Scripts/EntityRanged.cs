@@ -33,7 +33,6 @@ public class EntityRanged : Entity
                         proj.Damage = Damage;
                         proj.Friendly = Friendly;
                         proj.IsShotgunProjectile = false;
-                        AudioManager.PlayLocalSound(AudioManager.Instance.PlasmaBoltSound);
                     }
                     break;
                 };

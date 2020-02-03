@@ -6,7 +6,7 @@ public class EnemyMelee : EntityMelee
 {
     ContactFilter2D TargetFilter;
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
         TargetFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Friendly") };

@@ -40,7 +40,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public float SpriteOffset;
     public bool AttackingBase = false;
 
-    protected void Start()
+    protected virtual void Start()
     {
         if (Friendly)
         {
