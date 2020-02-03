@@ -112,8 +112,6 @@ public class MouseSelection : MonoBehaviour
             if (SelectedColliders.Count > 0)
                 if (Vector2.Distance(MoveMouseEnd, MoveMouseStart) < .3)
                 {
-                    Debug.Log(SelectionNumber);
-                    Debug.Log(SelectedColliders.Count);
                     if (SelectionNumber >= SelectedColliders.Count)
                         SelectionNumber = 0;
                     SelectedColliders[SelectionNumber].GetComponent<Entity>().TargetPos = MoveMouseStart;
