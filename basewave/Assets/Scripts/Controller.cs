@@ -8,8 +8,9 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     public float _BaseHP;
     public float BaseHP { get { return _BaseHP; } set { _BaseHP = value; rect.offsetMax = new Vector2(_BaseHP / MaxHP * 290f, rect.offsetMax.y); } }
     public int BaseLevel;
+    [SerializeField]
     private float _credits;
-    public float Credits { get => _credits; set => Mathf.Clamp(_credits, 0, float.MaxValue); }
+    public float Credits { get => _credits; set => _credits = Mathf.Clamp(_credits, 0, float.MaxValue); }
     public int Wave;
     [Header("Modifiers")]
     public float RangedDmgModifier;

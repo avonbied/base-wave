@@ -25,7 +25,8 @@ public class UnitSpawner : MonoBehaviour
 
     public int CurrentOnScreenCount = 0;
 
-    private float IncreaseTimer = 1;
+    private float IncreaseTimer1 = 15;
+    private float IncreaseTimer2 = 60;
 
     public int TotalUnitSpawnPerCap = 15;
     public float FinalMiniumSpawnRateTime = 0.1f;
@@ -57,15 +58,20 @@ public class UnitSpawner : MonoBehaviour
     private void Update()
     {
         spawnCounter -= Time.deltaTime;
-        IncreaseTimer -= Time.deltaTime;
+        IncreaseTimer1 -= Time.deltaTime;
+        IncreaseTimer2 -= Time.deltaTime;
 
-        if (IncreaseTimer <= 0)
+        if (IncreaseTimer1 <= 0)
         {
-            IncreaseTimer = 2;
+            IncreaseTimer1 = 15;
             if (SpawnRuntimeUnitCount < TotalUnitSpawnPerCap)
             {
                 SpawnRuntimeUnitCount += 1;
             }
+        }
+        if (IncreaseTimer2 <= 0)
+        {
+            IncreaseTimer2 = 60;
             if (SpawnRuntimeTime > FinalMiniumSpawnRateTime)
             {
                 SpawnRuntimeTime *= 0.95f;
