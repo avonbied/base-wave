@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetPos: {x: 0, y: 0, z: 0}
-  TargetPosDesignated: 1
+  TargetPosDesignated: 0
   EnemyTarget: {fileID: 0}
   RangeCollider: {fileID: 7771851562553304736}
   Speed: 5

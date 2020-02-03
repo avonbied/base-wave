@@ -291,7 +291,7 @@ MonoBehaviour:
   TargetPosDesignated: 1
   EnemyTarget: {fileID: 0}
   RangeCollider: {fileID: 4158616670849869363}
-  Speed: 1
+  Speed: 0.5
   HitPoints: 250
   Damage: 25
   FireRate: 15

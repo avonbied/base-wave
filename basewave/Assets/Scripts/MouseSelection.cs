@@ -101,7 +101,9 @@ public class MouseSelection : MonoBehaviour
         }
 
         if (Input.GetMouseButtonDown(1))
+        {
             MoveMouseStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
 
 
         if (Input.GetMouseButtonUp(1))
@@ -110,8 +112,13 @@ public class MouseSelection : MonoBehaviour
             if (SelectedColliders.Count > 0)
                 if (Vector2.Distance(MoveMouseEnd, MoveMouseStart) < .3)
                 {
-                    if (SelectionNumber >= SelectedColliders.Count) { SelectionNumber = 0; }
-                    SelectedColliders[SelectionNumber++].GetComponent<Entity>().TargetPos = MoveMouseStart;
+                    Debug.Log(SelectionNumber);
+                    Debug.Log(SelectedColliders.Count);
+                    if (SelectionNumber >= SelectedColliders.Count)
+                        SelectionNumber = 0;
+                    SelectedColliders[SelectionNumber].GetComponent<Entity>().TargetPos = MoveMouseStart;
+                    SelectedColliders[SelectionNumber].GetComponent<Entity>().TargetPosDesignated = true;
+                    SelectionNumber++;
                 }
                 else
                 {
