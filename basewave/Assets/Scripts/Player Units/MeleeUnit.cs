@@ -8,6 +8,7 @@ public class MeleeUnit : EntityMelee
 
     private void Start()
     {
+        base.Start();
         TargetFilter = new ContactFilter2D() { useLayerMask = true, layerMask = LayerMask.GetMask("Enemy") };
         Friendly = true;
     }

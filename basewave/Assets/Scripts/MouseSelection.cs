@@ -84,6 +84,8 @@ public class MouseSelection : MonoBehaviour
             {
                 foreach (var col in SelectedColliders)
                 {
+                    if (SelectedColliders == null)
+                        continue;
                     col.GetComponentInChildren<SpriteRenderer>().color = Color.white;
                 }
                 SelectedColliders.Clear();
@@ -113,7 +115,7 @@ public class MouseSelection : MonoBehaviour
                 }
                 else
                 {
-                    var x = 1.0f / (SelectedColliders.Count-1);
+                    var x = 1.0f / (SelectedColliders.Count - 1);
                     for (int i = 0; i < SelectedColliders.Count; i++)
                     {
                         SelectedColliders[i].GetComponent<Entity>().TargetPos = Vector2.Lerp(MoveMouseStart, MoveMouseEnd, x * i);
