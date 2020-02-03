@@ -38,12 +38,12 @@ public class TrackingAudioSource : MonoBehaviour
             this.transform.position = MyTrackedObject.transform.position;
         }
         MyAudioSource.PlayOneShot(clip, volume);
-        
-        
+
+
     }
     public void LoopSound(AudioClip clip, float volume)
     {
-        
+
         MyAudioSource.loop = true;
         MyAudioSource.volume = volume;
         MyAudioSource.clip = clip;
@@ -64,11 +64,11 @@ public class TrackingAudioSource : MonoBehaviour
         }
         else
         {
-            if(Expires)
-            if (!MyAudioSource.isPlaying)
-            {
+            if (Expires)
+                if (!MyAudioSource.isPlaying)
+                {
                     Return();
-            }
+                }
         }
     }
 
@@ -78,7 +78,7 @@ public class TrackingAudioSource : MonoBehaviour
         {
 
             this.gameObject.SetActive(false);
-            this.transform.SetParent(AudioManager.TheAudioManager.transform);
+            this.transform.SetParent(AudioManager.Instance.transform);
         }
     }
 }

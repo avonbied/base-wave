@@ -17,61 +17,71 @@ public class AudioManager : MonoBehaviour
     public TrackingAudioSource TrackingAudioSourcePrefab;
     public List<TrackingAudioSource> AudioSourcePool = new List<TrackingAudioSource>();
     public int AudioSourcePoolIndex = 0;
+
+
+    // Start is called before the first frame update
+    public static AudioManager Instance { get; private set; }
+
+    void Start()
+    {
+        if (this != null)
+            Destroy(this);
+
+        Instance = this;
+        DontDestroyOnLoad(Instance);
+    }
+
     //public AudioGroup
     public static void PlayLocalSound(AudioClip clip)
     {
         PlayLocalSound(clip, 1f);
     }
-    public static void PlayLocalSound(AudioClip clip,float volume)
+
+    public static void PlayLocalSound(AudioClip clip, float volume)
     {
-        if (TheAudioManager != null)
+        if (Instance != null)
         {
-            TheAudioManager.MyLocalAudioSource.PlayOneShot(clip, volume);
-        } else
+            Debug.Log("play");
+            Instance.MyLocalAudioSource.PlayOneShot(clip, volume);
+        }
+        else
         {
             Debug.LogWarning("No AudioManager in Scene.");
         }
     }
 
-    public static void PlayTrackedSound(AudioClip clip,float volume,GameObject o)
+    public static void PlayTrackedSound(AudioClip clip, float volume, GameObject o)
     {
         TrackingAudioSource ts = null;
-        for (int i = 0; i < AudioManager.TheAudioManager.AudioSourcePool.Count; i++)
+        for (int i = 0; i < AudioManager.Instance.AudioSourcePool.Count; i++)
         {
-            if ((AudioManager.TheAudioManager.AudioSourcePool[i] != null) && (!AudioManager.TheAudioManager.AudioSourcePool[i].gameObject.activeInHierarchy))
+            if ((AudioManager.Instance.AudioSourcePool[i] != null) && (!AudioManager.Instance.AudioSourcePool[i].gameObject.activeInHierarchy))
             {
-                ts = AudioManager.TheAudioManager.AudioSourcePool[i];
+                ts = AudioManager.Instance.AudioSourcePool[i];
                 break;
             }
         }
         if (ts == null)
         {
-            ts = GameObject.Instantiate(TheAudioManager.TrackingAudioSourcePrefab,TheAudioManager.transform);
-            
-        } else
-        {
-            AudioManager.TheAudioManager.AudioSourcePool.Remove(ts); //Put it at the back of the list when activated so that the inactive ones show up first
+            ts = GameObject.Instantiate(Instance.TrackingAudioSourcePrefab, Instance.transform);
+
         }
-        AudioManager.TheAudioManager.AudioSourcePool.Add(ts);
+        else
+        {
+            AudioManager.Instance.AudioSourcePool.Remove(ts); //Put it at the back of the list when activated so that the inactive ones show up first
+        }
+        AudioManager.Instance.AudioSourcePool.Add(ts);
         ts.Rent(o);
-            ts.PlaySound(clip,volume);
+        ts.PlaySound(clip, volume);
     }
     //public static TrackingAudioSource PlaySoundOnObject(AudioClip clip,float volume,GameObject obj)
     //{
 
     //}
-    
-    // Start is called before the first frame update
-    public static AudioManager TheAudioManager;
-    void Start()
-    {
-        
-        TheAudioManager = this;
-    }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
