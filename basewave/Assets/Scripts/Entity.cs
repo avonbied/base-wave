@@ -78,7 +78,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
                 points += 20;
                 break;
         }
-        points -= 0.05f * points * (Time.timeSinceLevelLoad / 10);
+        points -= Mathf.Clamp(0.05f * points * (Time.timeSinceLevelLoad / 10), 10, 1000);
 
         Global.Controller.Credits += points;
 
@@ -101,8 +101,8 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     public void AttackBase()
     {
         AttackingBase = true;
-        Global.Controller.Hit(Damage * Time.fixedDeltaTime*.25f);
-        ParticleManager.EmitAt(ParticleManager.TheParticleManager.WallHit,1, transform.position+transform.right*.2f,new Quaternion());
+        Global.Controller.Hit(Damage * Time.fixedDeltaTime * .25f);
+        ParticleManager.EmitAt(ParticleManager.TheParticleManager.WallHit, 1, transform.position + transform.right * .2f, new Quaternion());
         if (Class == ClassType.SuicideBomber)
         {
             Explode();
@@ -113,7 +113,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
 
     public void Explode()
     {
-        
+
     }
 
     public void LookAtPosition(Vector3 pos)
