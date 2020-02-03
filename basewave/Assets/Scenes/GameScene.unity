@@ -240,6 +240,7 @@ MonoBehaviour:
   MaxHP: 400
   _BaseHP: 400
   BaseLevel: 0
+  _credits: 0
   Wave: 0
   RangedDmgModifier: 1
   RangedHPModifier: 1
@@ -697,6 +698,7 @@ GameObject:
   - component: {fileID: 152283887}
   - component: {fileID: 152283886}
   - component: {fileID: 152283885}
+  - component: {fileID: 152283888}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -769,6 +771,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &152283888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152283884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74852f5ce79c01043b44e28785d78868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraMinDistance: 5
+  CameraMaxDistance: 100
 --- !u!1 &172087108
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,205 +2437,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053157229}
   m_CullTransparentMesh: 0
---- !u!1001 &1213456187
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1675153015046973736, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_Name
-      value: AudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RepairSounds.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: EnemyDeathSounds.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: PlasmaBoltSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 18d0f516fbfd4d046a1a033933ba4b73, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: LaserBeamSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 50a5d1572656da247982f109434b3e92, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: SwordSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 595d3f9ed6372864fb296cf2408042a7, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: ShotgunBlastSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 8d03a395a325d824c9be5baec45eea6f, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: BaseDamagedSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 44548db4abcdbca409cd1a3242192815, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RepairSounds.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2ff92efe46364fc4abe0837ca46f98a8, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RepairSounds.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 234dd69411692514aa78b51ba3fe18b0, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RepairSounds.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 1ca2b8501d28e9941b4469d20e6f82ff, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RepairSounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2ff92efe46364fc4abe0837ca46f98a8, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RepairSounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 234dd69411692514aa78b51ba3fe18b0, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RepairSounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 1ca2b8501d28e9941b4469d20e6f82ff, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: EnemyDeathSounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2e400cac96cb90d4d818ecbf83bc44ab, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: EnemyDeathSounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: ab7b09797afc90346b5cfb25f4555ae5, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: EnemyDeathSounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: ffcd6ad57abcde545ba2075dae767a7d, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: EnemyDeathSounds.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: a271f6f426bdd0d4792df91d780b4f29, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: EnemyDeathSounds.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: f855760f2ff353d408b4d5f4d897391d, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: EnemySuicideExplosionSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 835512e9f069b41459f6cbf0ffcfb619, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: EnemySuicideScreechSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 1ba0d470d5697fb4fb91f4765a25cb10, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: UnitSpawnSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 487b493ee7f72f04aba782d1e36d4776, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: HUDClickSound
-      value: 
-      objectReference: {fileID: 8300000, guid: fae506cd3906f444b9a60653c26fbf1d, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RobotDialogue1Sound
-      value: 
-      objectReference: {fileID: 8300000, guid: 9cfe2ff470e52234eb4ceb9d11f3e4dc, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RobotDialogue2Sound
-      value: 
-      objectReference: {fileID: 8300000, guid: 4b4279c8d4629d542832d6088c04dcf7, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RobotDialogue3Sound
-      value: 
-      objectReference: {fileID: 8300000, guid: 4e26c6a395766c743aad72f4ce661f8f, type: 3}
-    - target: {fileID: 1675153015046973910, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: RobotDialogue4Sound
-      value: 
-      objectReference: {fileID: 8300000, guid: 842ecdbb60db4c0449cc19c7775c926b, type: 3}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.979946
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.211097
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675153015046973911, guid: 7f8c2ac6108a65545bf76f8bf11233c6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7f8c2ac6108a65545bf76f8bf11233c6, type: 3}
 --- !u!1001 &1238309988
 PrefabInstance:
   m_ObjectHideFlags: 0
