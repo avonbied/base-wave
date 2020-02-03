@@ -8,7 +8,8 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     public float _BaseHP;
     public float BaseHP { get { return _BaseHP; } set { _BaseHP = value; rect.offsetMax = new Vector2(_BaseHP / MaxHP * 290f, rect.offsetMax.y); } }
     public int BaseLevel;
-    public float Credits;
+    private float _credits;
+    public float Credits { get => _credits; set => Mathf.Clamp(_credits, 0, float.MaxValue); }
     public int Wave;
     [Header("Modifiers")]
     public float RangedDmgModifier;
@@ -61,7 +62,7 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     int TimesUsed = 0;
     public void BuyRepairBase()
     {
-        if (AttemptToBuy(CostRepair * (TimesUsed+1)))
+        if (AttemptToBuy(CostRepair * (TimesUsed + 1)))
         {
             TimesUsed++;
             Global.Controller.BaseHP = Global.Controller.MaxHP;
@@ -126,12 +127,11 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
         BaseHP += HitPoints;
     }
 
-
     public bool AttemptToBuy(float Cost)
     {
         if (Credits >= Cost)
         {
-            Credits -= Cost;
+            _credits -= Cost;
             return true;
         }
         return false;
