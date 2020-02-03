@@ -18,4 +18,8 @@ public static class Global
 
     public static PoolManager ProjectilePool;
     public static UnitSpawner UnitSpawner;
+
+    public static float FriendlyDamageMultiplier = 1;
+    public static float EnemyHPMultiplier = 1;
+    public static float TimeGameStarted;
 }

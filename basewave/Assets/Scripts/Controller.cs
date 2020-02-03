@@ -76,6 +76,7 @@ public class Controller : MonoBehaviour, IDamageable, IHealable
     {
         Global.ProjectilePool = pool;
         Global.UnitSpawner = GetComponent<UnitSpawner>();
+        Global.TimeGameStarted = Time.realtimeSinceStartup;
     }
 
     void Start()

@@ -36,7 +36,8 @@ public class UnitSpawner : MonoBehaviour
         SpawnZoneRects = new Rect[SpawnZoneObjects.Length];
         ConvertSpawnZones();
         spawnCounter = SpawnRuntimeTime;
-
+        Global.EnemyHPMultiplier = 1;
+        Global.FriendlyDamageMultiplier = 1;
         DoSpawn(SpawnZoneRects, EntityPrefabs, StartSpawnRatio, StartSpawnUnitCount);
     }
 
@@ -64,6 +65,7 @@ public class UnitSpawner : MonoBehaviour
         if (IncreaseTimer1 <= 0)
         {
             IncreaseTimer1 = 15;
+            Global.EnemyHPMultiplier *= 1.01f;
             if (SpawnRuntimeUnitCount < TotalUnitSpawnPerCap)
             {
                 SpawnRuntimeUnitCount += 1;

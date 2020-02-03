@@ -44,11 +44,11 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
     {
         if (Friendly)
         {
-            Damage += 0.17f * Damage * (Time.timeSinceLevelLoad / 10);
+            Damage += Damage * Global.FriendlyDamageMultiplier;
         }
         else
         {
-            HitPoints += 0.15f * HitPoints * (Time.timeSinceLevelLoad / 10);
+            HitPoints = HitPoints * Global.EnemyHPMultiplier;
         }
     }
 
@@ -63,23 +63,23 @@ public abstract class Entity : MonoBehaviour, IDamageable, IHealable
                 points += 20;
                 break;
             case ClassType.RangedBeam:
-                points += 40;
+                points += 5;
                 break;
             case ClassType.RangedMortar:
-                points += 80;
+                points += 5;
                 break;
             case ClassType.RangedProjectile:
-                points += 20;
+                points += 7;
                 break;
             case ClassType.Shotgun:
-                points += 30;
+                points += 10;
                 break;
             case ClassType.SuicideBomber:
-                points += 20;
+                points += 15;
                 break;
         }
-        points -= Mathf.Clamp(0.05f * points * (Time.timeSinceLevelLoad / 10), 10, 1000);
-
+        points -= (Time.realtimeSinceStartup - Global.TimeGameStarted) * 0.005f;
+        points = Mathf.Clamp(points, 3, 1000000000);
         Global.Controller.Credits += points;
 
         Global.UnitSpawner.CurrentOnScreenCount -= 1;
