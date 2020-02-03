@@ -260,7 +260,7 @@ MonoBehaviour:
   Damage: 35
   FireRate: 0.75
   ProjectileSpeed: 25
-  BaseWeaponRange: 2
+  BaseWeaponRange: 4
   TimeLastFired: 0
   Friendly: 0
   CreditWorth: 0
